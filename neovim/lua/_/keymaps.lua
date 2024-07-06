@@ -18,8 +18,9 @@ vim.keymap.set({'n', 'v'}, '<leader>y', [["+y]])
 -- Delete to black hole register
 vim.keymap.set({'n', 'v'}, '<leader>d', [["_d]])
 
--- Paste inline
-vim.keymap.set('n', '<leader>p', 'pkJ')
+-- Paste from clipboard
+vim.keymap.set({'n', 'v'}, '<leader>p', [["+p]])
 
 -- Close all panes except currently focused one
 vim.keymap.set('n', '<leader>;', '<cmd>only<CR>')
+
