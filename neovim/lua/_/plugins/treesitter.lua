@@ -61,20 +61,6 @@ return {
                         ['a='] = '@assignment.outer',
                         ['l='] = '@assignment.lhs',
                         ['r='] = '@assignment.rhs',
-                        ['ip'] = '@parameter.inner',
-                        ['ap'] = '@parameter.outer',
-                    }
-                },
-                -- Swap two items around with treesitter context
-                swap = {
-                    enable = true,
-                    swap_next = {
-                        ['<leader>na'] = '@parameter.inner',
-                        ['<leader>nm'] = '@function.outer',
-                    },
-                    swap_previous = {
-                        ['<leader>pa'] = '@parameter.inner',
-                        ['<leader>pm'] = '@function.outer',
                     }
                 },
                 -- Move between items with treesitter context
