@@ -3,7 +3,7 @@
 
 [core]
     autoclrf = true
-    editor = nvim
+    editor = nvim --noplugin
     excludesFile = ~/.gitignore
     attributesFile = ~/.gitattributes
     pager = delta
