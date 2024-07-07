@@ -20,7 +20,7 @@ return {
             },
             format_on_save = {
                 timeout_ms = 500,
-                lsp_format = 'fallback',
+                -- lsp_format = 'fallback',    Due to mild annoyances, I only want to format on save when I have a formatter specifically configured
             }
         })
 
