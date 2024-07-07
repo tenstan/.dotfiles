@@ -1,3 +1,7 @@
+-- low priority TODO: set up a Gherkin LSP. Unfortunately, cucumber-language-server doesn't cut it,
+-- because it shows warnings that step definitions don't exist while starting (takes about 5 seconds), and it doesn't include
+-- a formatter for formatting tables.
+
 local on_lsp_attach = function(client, bufnr)
     local opts = { buffer = bufnr }
 
