@@ -6,35 +6,25 @@ return {
         'nvim-lua/plenary.nvim',
         'antoinemadec/FixCursorHold.nvim',
         'nvim-treesitter/nvim-treesitter',
-        'Issafalcon/neotest-dotnet',
+        'nvim-neotest/neotest-jest'
     },
     config = function()
         local neotest = require('neotest')
-        
+
         neotest.setup({
             adapters = {
-                require('neotest-dotnet')({
-                    discovery_root = 'solution'
-                })
-            },
-            summary = {
-                mappings = {
-                    run = 'r',
-                    output = 'o',
-                }
+                require('neotest-jest')({
+                    jestCommand = 'npm test',
+                }),
             },
         })
 
-        vim.keymap.set('n', '<leader>tn',  function() neotest.run.run()                        end)
-        vim.keymap.set('n', '<leader>td',  function() neotest.run.run(vim.fn.expand('%'))      end)
-        vim.keymap.set('n', '<leader>ts',  function() neotest.run.stop()                       end)
-        vim.keymap.set('n', '<leader>tt',  function() neotest.summary.toggle()                 end)
-        vim.keymap.set('n', '<leader>tw',  function() neotest.watch.toggle()                   end)
-        vim.keymap.set('n', '<leader>tfw', function() neotest.watch.toggle(vim.fn.expand("%")) end)
-        
-        vim.keymap.set('n', '<leader>ta', function() 
-            neotest.run.run({ suite = true })
-            neotest.summary.open()
+        vim.keymap.set('n', '<leader>tn', function() neotest.run.run() end,                   { desc = 'Run nearest test' })
+        vim.keymap.set('n', '<leader>td', function() neotest.run.run(vim.fn.expand('%')) end, { desc = 'Run tests in document' })
+        vim.keymap.set('n', '<leader>ts', function() neotest.run.stop() end,                  { desc = 'Stop currently running tests' })
+        vim.keymap.set('n', '<leader>tt', function() neotest.summary.toggle() end,            { desc = 'Toggle test window' })
+        vim.keymap.set('n', '<leader>ta', function() neotest.run.run({ suite = true },        { desc = 'Run all tests' })
         end)
     end
 }
+
