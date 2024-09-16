@@ -47,6 +47,7 @@ return {
             local ensure_installed = {
                 'bashls',                   --
                 'cssls',                    --
+                'cssmodules_ls',            --
                 'dockerls',                 --
                 'eslint',                   --
                 'html',                     --
@@ -89,7 +90,18 @@ return {
                         require('lspconfig').powershell_es.setup({
                             shell = 'powershell.exe',
                         })
-                    end
+                    end,
+
+                    ['cssmodules_ls'] = function ()
+                        require('lspconfig').cssmodules_ls.setup({
+                            init_options = {
+                                camelCase = true,
+                            },
+                            on_attach = function (client)
+                                client.server_capabilities.definitionProvider = false
+                            end
+                        })
+                    end,
                 }
             })
 
