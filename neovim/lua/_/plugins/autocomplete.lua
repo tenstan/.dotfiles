@@ -49,7 +49,6 @@ return {
                     ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
                     ['<C-space>'] = cmp.mapping.complete(), -- Mapping doesn't work on Windows because of this I think https://github.com/libuv/libuv/issues/1958 (otherwise use an nvim GUI client instead)
                     ['<C-e>'] = cmp.mapping.abort(),
-                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
                 }),
                 completion = {
                     completeopt = 'menu,menuone' -- Automatically select first item in completion list
