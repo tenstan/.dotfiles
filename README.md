@@ -37,3 +37,10 @@ git clone https://github.com/tenstan/.dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ./install-ubuntu-wsl.sh
 ```
+
+### Arch Linux
+```sh
+git clone https://github.com/tenstan/.dotfiles ~/.dotfiles
+cd ~/.dotfiles
+./install-arch.sh
+```
