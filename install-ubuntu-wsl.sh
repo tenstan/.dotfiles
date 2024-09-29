@@ -37,7 +37,7 @@ echo $decorativeLine
 sudo apt install -y curl git build-essential ripgrep fd-find bat
 
 # Fix 'bat' name clash with other Debian package
-ln -s /usr/bin/batcat /usr/bin/bat
+sudo ln -s --force /usr/bin/batcat /usr/bin/bat
 
 echo ''
 
