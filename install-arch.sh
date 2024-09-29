@@ -28,6 +28,7 @@ sudo pacman --needed --noconfirm -Syu \
     man \
     neovim \
     networkmanager \
+    openssh \
     ripgrep \
     unzip \
     ttf-firacode-nerd \
@@ -40,6 +41,13 @@ echo $decorativeLine
 sudo systemctl enable NetworkManager.service
 sudo systemctl start NetworkManager.service
 echo ''
+
+echo "Starting sshd."
+echo $decorativeLine
+sudo systemctl enable sshd
+sudo systemctl start sshd
+echo ''
+
 
 echo 'Configuring neovim.'
 echo $decorativeLine
