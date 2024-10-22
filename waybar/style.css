@@ -88,3 +88,11 @@ window#waybar {
     padding-right: 15px;
 }
 
+
+#battery.warning {
+    color: #ebc634;
+}
+
+#battery.critical {
+    color: #eb4c34;
+}
