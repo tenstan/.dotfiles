@@ -11,43 +11,52 @@ sudo sed -i 's/#Color/Color/' /etc/pacman.conf
 sudo sed -i 's/^#ParallelDownloads.*/ParallelDownloads = 5/' /etc/pacman.conf
 echo ''
 
-echo "Installing preferred tooling."
+echo "Installing preferred packages."
 echo $decorativeLine
-sudo pacman --needed --noconfirm -Syu \
-    base-devel \
-    bat \
-    curl \
-    discord \
-    fd \
-    firefox-developer-edition \
-    fzf \
-    git \
-    jq \
-    keepassxc \
-    less \
-    man \
-    neovim \
-    networkmanager \
-    openssh \
-    ripgrep \
-    unzip \
-    ttf-firacode-nerd \
-    wget \
+packages_to_install=(
+    base-devel
+    bat
+    curl
+    discord
+    fd
+    firefox-developer-edition
+    fzf
+    git
+    jq
+    keepassxc
+    less
+    man
+    neovim
+    networkmanager
+    openssh
+    ripgrep
+    unzip
+    ttf-firacode-nerd            # wezterm, waybar dependency
+    wget
     wl-clipboard
+    pavucontrol                  # waybar dependency
+    ttf-font-awesome             # waybar dependency
+)
+sudo pacman --needed --noconfirm -Syu "${packages[@]}"
 echo ''
 
-echo "Starting NetworkManager."
+echo 'Starting NetworkManager.'
 echo $decorativeLine
 sudo systemctl enable NetworkManager.service
 sudo systemctl start NetworkManager.service
 echo ''
 
-echo "Starting sshd."
+echo 'Starting sshd.'
 echo $decorativeLine
 sudo systemctl enable sshd
 sudo systemctl start sshd
 echo ''
 
+echo 'Configuring generic symlinks.'
+echo $decorativeLine
+ln -sf "$dotfilesPath/waybar" "$HOME/.config/waybar"
+echo 'Created symlink for waybar.'
+echo ''
 
 echo 'Configuring neovim.'
 echo $decorativeLine
