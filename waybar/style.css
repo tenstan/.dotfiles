@@ -1,0 +1,90 @@
+@define-color color-bg-widget     #121212;
+@define-color color-text-widget   #FFFFFF;
+@define-color color-border-widget #6200EE;
+
+@define-color color-wsps-bg-active     #7F39FB;
+@define-color color-wsps-bg-inactive   #000000;
+@define-color color-wsps-bg-hover      #6200EE;
+@define-color color-wsps-text-active   #FFFFFF;
+@define-color color-wsps-text-inactive #FFFFFF;
+@define-color color-wsps-border        #6200EE;
+
+* {
+    font-family: "FiraCode Nerd Font";
+    border: none;
+    border-radius: 0px;
+    font-size: 14px;
+}
+
+window#waybar {
+    border-radius: 0px 0px 4px 4px;
+    background: transparent;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.modules-right,
+.modules-left > * > * {
+    margin-right: 10px;
+}
+
+.modules-left,
+.modules-right > * > * {
+    margin-left: 10px;
+}
+
+#workspaces {
+    background: @color-wsps-bg-inactive;
+    border-radius: 15px;
+    font-weight: 700;
+    border: 2px @color-wsps-border solid;
+    color: @color-wsps-text-inactive;
+}
+
+#workspaces button {
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:first-child {
+    border-radius: 12px 0px 0px 12px;
+}
+
+#workspaces button:first-child:only-child {
+    border-radius: 12px;
+}
+
+#workspaces button:last-child {
+    border-radius: 0px 12px 12px 0px;
+}
+
+#workspaces button.active {
+    color: @color-wsps-text-active;
+    background: @color-wsps-bg-active;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#workspaces button:hover {
+    background: @color-wsps-bg-hover;
+}
+
+#battery,
+#cpu,
+#memory,
+#tray,
+#pulseaudio,
+#clock {
+    background-color: @color-bg-widget;
+    color: @color-text-widget;
+    font-weight: bold;
+    border-radius: 5px;
+    border: @color-border-widget 2px solid;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+

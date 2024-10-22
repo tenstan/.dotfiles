@@ -1,0 +1,85 @@
+// -*- mode: jsonc -*-
+
+// Dependencies:
+// * pavucontrol
+// * ttf-firacode-nerd
+// * ttf-font-awesome
+
+{
+    "layer": "bottom",
+    "position": "top",
+    "reload_style_on_change": true,
+    "modules-left": [
+        "battery",
+        "cpu",
+        "memory"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "tray",
+        "pulseaudio",
+        "clock"
+    ],
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 10
+        },
+        "format": "{icon}{capacity}%",
+        "format-icons": [" "," ", " "," ", " "],
+        "format-charging": "󱐌 {capacity}%"
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%A, %B %d, %Y (%T)}",
+        "tooltip": true,
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "interval": 1,
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "left",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#c0caf5'><b>{}</b></span>",
+                "days": "<span color='#c0caf5'><b>{}</b></span>",
+                "weeks": "<span color='#7dcfff'><b>W{}</b></span>",
+                "weekdays": "<span color='#ff9e64'><b>{}</b></span>",
+                "today": "<span color='#f7768e'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "cpu": {
+        "format": "  {usage}%"
+    },
+    "memory": {
+        "format": " {used:0.1f}G",
+        "tooltip-format": "{used:0.1f}G/{total:0.1f}G used ({percentage}%)"
+    },
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "default": [
+                "",
+                ""
+            ]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "ignored-sinks": [
+            "Easy Effects Sink"
+        ]
+    },
+    "tray": {
+        "icon-size": 20,
+        "spacing": 12
+    }
+}
