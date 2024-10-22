@@ -25,7 +25,7 @@
     "battery": {
         "states": {
             "warning": 30,
-            "critical": 10
+            "critical": 15
         },
         "format": "{icon}{capacity}%",
         "format-icons": [" "," ", " "," ", " "],
