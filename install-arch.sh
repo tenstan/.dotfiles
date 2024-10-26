@@ -60,14 +60,16 @@ echo ''
 
 echo 'Configuring generic symlinks.'
 echo $decorativeLine
+mkdir -p "$HOME/.config"
 ln -sf "$dotfilesPath/waybar" "$HOME/.config/waybar"
 echo 'Created symlink for waybar.'
+ln -sf "$dotfilesPath/wezterm" "$HOME/.config/wezterm"
+echo 'Created symlink for wezterm.'
 echo ''
 
 echo 'Configuring neovim.'
 echo $decorativeLine
 rm -rf "$HOME/.config/nvim"
-mkdir -p "$HOME/.config"
 ln -sf "$dotfilesPath/neovim" "$HOME/.config/nvim"
 echo "Neovim config has been placed under HOME/.config/nvim."
 echo ''
