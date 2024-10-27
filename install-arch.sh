@@ -16,26 +16,44 @@ echo $decorativeLine
 packages_to_install=(
     base-devel
     bat
+    blueman
+    brightnessctl
     curl
     discord
     fd
     firefox-developer-edition
     fzf
     git
+    grim
+    hypridle
+    hyprland
+    hyprlock
+    hyprpaper
     jq
     keepassxc
     less
-    man
+    man-db
     neovim
+    network-manager-applet
     networkmanager
     openssh
+    pavucontrol                  # waybar dependency
+    pipewire
+    pipewire-pulse
     ripgrep
+    slurp
+    sudo
+    swappy
+    swaync
+    ufw
     unzip
     ttf-firacode-nerd            # wezterm, waybar dependency
+    ttf-font-awesome             # waybar dependency
+    waybar
     wget
     wl-clipboard
-    pavucontrol                  # waybar dependency
-    ttf-font-awesome             # waybar dependency
+    wireplumber
+    xdg-desktop-portal-hyprland
 )
 sudo pacman --needed --noconfirm -Syu "${packages[@]}"
 echo ''
@@ -105,6 +123,7 @@ echo ''
 echo "Installing AUR packages."
 echo $decorativeLine
 yay -Syu --needed \
+    chatterino2-git \
     nvm
 echo ''
 
