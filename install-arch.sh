@@ -40,6 +40,7 @@ packages_to_install=(
     pavucontrol                  # waybar dependency
     pipewire
     pipewire-pulse
+    polkit
     ripgrep
     slurp
     sudo
@@ -74,6 +75,12 @@ echo 'Starting Bluetooth.'
 echo $decorativeLine
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
+echo ''
+
+echo 'Starting UFW.'
+echo $decorativeLine
+sudo systemctl enable ufw.service
+sudo systemctl start ufw.service
 echo ''
 
 echo 'Configuring generic symlinks.'
