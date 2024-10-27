@@ -61,9 +61,9 @@ echo ''
 echo 'Configuring generic symlinks.'
 echo $decorativeLine
 mkdir -p "$HOME/.config"
-ln -sf "$dotfilesPath/waybar" "$HOME/.config/waybar"
+ln -sf --no-target-directory "$dotfilesPath/waybar" "$HOME/.config/waybar"
 echo 'Created symlink for waybar.'
-ln -sf "$dotfilesPath/wezterm" "$HOME/.config/wezterm"
+ln -sf --no-target-directory "$dotfilesPath/wezterm" "$HOME/.config/wezterm"
 echo 'Created symlink for wezterm.'
 echo ''
 
