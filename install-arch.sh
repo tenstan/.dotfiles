@@ -11,7 +11,7 @@ sudo sed -i 's/#Color/Color/' /etc/pacman.conf
 sudo sed -i 's/^#ParallelDownloads.*/ParallelDownloads = 5/' /etc/pacman.conf
 echo ''
 
-echo "Installing preferred packages."
+echo "Installing Arch packages."
 echo $decorativeLine
 packages_to_install=(
     base-devel
@@ -42,6 +42,7 @@ packages_to_install=(
     pipewire
     pipewire-pulse
     polkit
+    python-gpgme                 # Dropbox dependency when installing from AUR, see https://wiki.archlinux.org/title/Dropbox#Required_packages
     ripgrep
     slurp
     sudo
@@ -58,6 +59,25 @@ packages_to_install=(
     xdg-desktop-portal-hyprland
 )
 sudo pacman --needed --noconfirm -Syu "${packages[@]}"
+echo ''
+
+echo "Installing yay."
+echo $decorativeLine
+if command -v yay >/dev/null 2>&1; then
+    echo "yay seems to be already installed."
+else
+    yay_tmp=$(mktemp -d)
+    git clone https://aur.archlinux.org/yay-bin.git "$yay_tmp/yay-bin"
+    makepkg -sif "$yay_tmp/yay-bin/PKGBUILD"
+fi
+echo ''
+
+echo "Installing AUR packages."
+echo $decorativeLine
+yay -Syu --needed \
+    chatterino2-git \
+    dropbox \
+    fnm
 echo ''
 
 echo 'Starting NetworkManager.'
@@ -119,15 +139,11 @@ if [ ! -f "$HOME/.local.gitconfig" ]; then
 fi
 echo ''
 
-echo "Installing yay."
+# Necessary workaround for the dropbox client, see https://wiki.archlinux.org/title/Dropbox#Prevent_automatic_updates
+echo "Initializing '.dropbox-dist'."
 echo $decorativeLine
-if command -v yay >/dev/null 2>&1; then
-    echo "yay seems to be already installed."
-else
-    yay_tmp=$(mktemp -d)
-    git clone https://aur.archlinux.org/yay-bin.git "$yay_tmp/yay-bin"
-    makepkg -sif "$yay_tmp/yay-bin/PKGBUILD"
-fi
+rm -rf ~/.dropbox-dist
+install -dm0 ~/.dropbox-dist
 echo ''
 
 echo "Installing AUR packages."
