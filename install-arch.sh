@@ -22,6 +22,7 @@ packages_to_install=(
     discord
     fd
     firefox-developer-edition
+    fish
     fzf
     git
     grim
@@ -90,6 +91,8 @@ ln -sf --no-target-directory "$dotfilesPath/waybar" "$HOME/.config/waybar"
 echo 'Created symlink for waybar.'
 ln -sf --no-target-directory "$dotfilesPath/wezterm" "$HOME/.config/wezterm"
 echo 'Created symlink for wezterm.'
+ln -sf --no-target-directory "$dotfilesPath/fish" "$HOME/.config/fish"
+echo 'Created symlink for fish.'
 echo ''
 
 echo 'Configuring neovim.'
@@ -131,7 +134,7 @@ echo "Installing AUR packages."
 echo $decorativeLine
 yay -Syu --needed \
     chatterino2-git \
-    nvm
+    fnm
 echo ''
 
 echo 'Done!'
