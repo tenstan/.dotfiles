@@ -104,6 +104,12 @@ sudo systemctl enable ufw.service
 sudo systemctl start ufw.service
 echo ''
 
+echo 'Starting ssh-agent.'
+echo $decorativeLine
+systemctl --user enable ssh-agent.service
+systemctl --user start ssh-agent.service
+echo ''
+
 echo 'Configuring generic symlinks.'
 echo $decorativeLine
 mkdir -p "$HOME/.config"
