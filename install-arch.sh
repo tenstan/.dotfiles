@@ -146,11 +146,11 @@ rm -rf ~/.dropbox-dist
 install -dm0 ~/.dropbox-dist
 echo ''
 
-echo "Installing AUR packages."
+echo "Setting Fish as the login shell."
 echo $decorativeLine
-yay -Syu --needed \
-    chatterino2-git \
-    fnm
+if [[ "$SHELL" != "$(command -v fish)" ]]; then
+    chsh -s "$(command -v fish)"
+fi
 echo ''
 
 echo 'Done!'
