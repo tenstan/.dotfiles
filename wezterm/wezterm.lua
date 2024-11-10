@@ -96,7 +96,6 @@ return {
     automatically_reload_config = true,
     enable_tab_bar = false,
     colors = colors,
-    default_prog = { '/usr/bin/fish', '-l' },
     font = wezterm.font('FiraCode Nerd Font', { weight = 'Medium' }),
     force_reverse_video_cursor = true,
     keys = keys,
