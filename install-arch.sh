@@ -25,6 +25,7 @@ packages_to_install=(
     fish
     fzf
     git
+    git-delta
     grim
     hypridle
     hyprland
