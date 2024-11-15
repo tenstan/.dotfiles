@@ -3,12 +3,12 @@ return {
     dependencies = {
         'nvim-tree/nvim-web-devicons'
     },
-    config = function ()
+    config = function()
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
 
         local ignored_files = {
-            '^\\.git'
+            '^\\.git$'
         }
 
         require('nvim-tree').setup({
