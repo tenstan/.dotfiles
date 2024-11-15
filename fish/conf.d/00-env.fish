@@ -30,7 +30,8 @@ set __fish_git_prompt_color_branch cyan
 
 # ssh-agent
 
-# ssh-agent.service should be enabled from install script. Keys are managed with KeepassXC.
-# This needs to be set in order for KeepassXC SSH integration to function.
+# ssh-agent.service should be enabled through the install script. Keys are managed with KeepassXC.
+# When using 'IdentitiesOnly' in .ssh/config, the public key must be extracted from KeepassXC and set as the IdentityFile for the loaded key to be found.
+# This environment variable needs to be set in order for KeepassXC SSH integration to function.
 set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
 
