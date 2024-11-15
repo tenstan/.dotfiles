@@ -3,6 +3,14 @@
 
 [alias]
     pf = push --force-with-lease
+    amend = commit --amend --no-edit
+    rss = "!git restore --staged :/"
+    rsw =  "!git restore --worktree :/"
+    rsA = "!git restore --staged --worktree :/"
+
+    # Use current index and fixup the specified commit
+    # Based on https://stackoverflow.com/a/21148981/13583337
+    fixup = "!sh -c '(git diff-files --quiet || (echo Unstaged changes, please commit or stash with --keep-index; exit 1)) && COMMIT=$(git rev-parse $1) && git commit --fixup=$COMMIT && git rebase -i --autosquash $COMMIT~1' -"
 
 [merge]
     tool = nvim
