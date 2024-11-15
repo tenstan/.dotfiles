@@ -114,6 +114,8 @@ echo ''
 echo 'Configuring generic symlinks.'
 echo $decorativeLine
 mkdir -p "$HOME/.config"
+ln -sf --no-target-directory "$dotfilesPath/hyprland" "$HOME/.config/hypr"
+echo 'Created symlink for Hyprland.'
 ln -sf --no-target-directory "$dotfilesPath/waybar" "$HOME/.config/waybar"
 echo 'Created symlink for waybar.'
 ln -sf --no-target-directory "$dotfilesPath/wezterm" "$HOME/.config/wezterm"
