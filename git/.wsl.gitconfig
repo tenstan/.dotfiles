@@ -26,6 +26,9 @@
 
 [alias]
     pf = push --force-with-lease
+    rss = "!git restore --staged :/"
+    rsw =  "!git restore --worktree :/"
+    rsA = "!git restore --staged --worktree :/"
 
     # Use current index and fixup the specified commit
     # Based on https://stackoverflow.com/a/21148981/13583337
