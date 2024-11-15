@@ -7,10 +7,18 @@ return {
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
 
+        local ignored_files = {
+            '^\\.git'
+        }
+
         require('nvim-tree').setup({
             -- Follow currently opened buffer
             update_focused_file = {
                 enable = true
+            },
+            filters = {
+                git_ignored = false,
+                custom = ignored_files
             }
         })
 
