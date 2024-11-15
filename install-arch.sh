@@ -122,6 +122,8 @@ ln -sf --no-target-directory "$dotfilesPath/wezterm" "$HOME/.config/wezterm"
 echo 'Created symlink for wezterm.'
 ln -sf --no-target-directory "$dotfilesPath/fish" "$HOME/.config/fish"
 echo 'Created symlink for fish.'
+ln -sf --no-target-directory "$dotfilesPath/fuzzel" "$HOME/.config/fuzzel"
+echo 'Created symlink for fuzzel.'
 echo ''
 
 echo 'Configuring neovim.'
