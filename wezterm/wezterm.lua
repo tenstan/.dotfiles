@@ -101,5 +101,4 @@ return {
     keys = keys,
     line_height = 1.2,
     font_size = 11,
-    enable_wayland = false, -- Wezterm doesn't start at all when using Hyprland without this
 }
