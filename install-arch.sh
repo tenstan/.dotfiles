@@ -78,6 +78,7 @@ echo $decorativeLine
 yay -Syu --needed \
     chatterino2-git \
     dropbox \
+    wezterm-git \
     fnm
 echo ''
 
