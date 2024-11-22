@@ -22,3 +22,4 @@ vim.keymap.set({'n', 'v'}, '<leader>p', [["+p]])
 -- Close all panes except currently focused one
 vim.keymap.set('n', '<leader>;', '<cmd>only<CR>')
 
+vim.keymap.set('n', '<leader>ee', function() vim.diagnostic.open_float() end)
