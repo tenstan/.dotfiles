@@ -26,6 +26,7 @@
 
 [alias]
     pf = push --force-with-lease
+    amend = commit --amend --no-edit
     rss = "!git restore --staged :/"
     rsw =  "!git restore --worktree :/"
     rsA = "!git restore --staged --worktree :/"
