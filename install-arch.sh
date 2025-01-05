@@ -20,6 +20,9 @@ packages_to_install=(
     brightnessctl
     curl
     discord
+    docker
+    docker-buildx
+    docker-compose
     fd
     firefox-developer-edition
     fish
@@ -86,6 +89,12 @@ echo 'Starting NetworkManager.'
 echo $decorativeLine
 sudo systemctl enable NetworkManager.service
 sudo systemctl start NetworkManager.service
+echo ''
+
+echo 'Starting Docker.'
+echo $decorativeLine
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
 echo ''
 
 echo 'Starting sshd.'
