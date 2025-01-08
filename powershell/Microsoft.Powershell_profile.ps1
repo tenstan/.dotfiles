@@ -8,6 +8,7 @@
 
 
 Import-Module posh-git
+Import-Module PsFzf
 
 
 # Set up theme
@@ -28,34 +29,4 @@ function df { Set-Location -Path "$home\.dotfiles" }
 $env:BAT_PAGING = 'never' # Disable paging with bat
 Remove-Item Alias:cat -Force
 Set-Alias -Name cat -Value bat -Scope Global -Force
-
-
-# Set up fzf
-Set-Alias -Name fkill -Value Invoke-FuzzyKillProcess -Force
-Set-Alias -Name fh    -Value Invoke-FuzzyHistory     -Force
-
-## Go to directory based on search term
-function ff {
-    $fileIgnoreList = @(
-        'node_modules',
-        '.git',
-        '.vs',
-        'bin',
-        'obj',
-        '.idea'
-    )
-    $fileIgnoreArgs = ($fileIgnoreList | ForEach-Object { "--exclude '$_'" }) -join ' '
-
-    # I could just write my own fzf invocation instead of relying on Invoke-Fzf,
-    # but I haven't figured out how to stream the results of fd to fzf yet (instead of blocking the terminal).
-    $originalFzfDefaultCommand = $env:FZF_DEFAULT_COMMAND
-    $env:FZF_DEFAULT_COMMAND = "fd --type directory --hidden $fileIgnoreArgs"
-
-    $result = Invoke-Fzf
-    if ($result) {
-        Set-Location $result
-    }
-
-    $env:FZF_DEFAULT_COMMAND = $originalFzfDefaultCommand
-}
 
