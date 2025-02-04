@@ -10,13 +10,13 @@ return {
         local conform = require('conform')
         conform.setup({
             formatters_by_ft = {
-                javascript = { 'prettierd' },
-                jsx = { 'prettierd' },
-                javascriptreact = { 'prettierd' },
+                javascript = { 'prettier' },
+                jsx = { 'prettier' },
+                javascriptreact = { 'prettier' },
 
-                typescript = { 'prettierd' },
-                tsx = { 'prettierd' },
-                typescriptreact = { 'prettierd' },
+                typescript = { 'prettier' },
+                tsx = { 'prettier' },
+                typescriptreact = { 'prettier' },
 
                 markdown = { 'prettierd' },
             },
