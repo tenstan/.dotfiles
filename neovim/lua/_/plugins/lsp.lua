@@ -56,7 +56,7 @@ return {
                 'lua_ls',                   --
                 'marksman',                 --
                 'svelte',                   -- Requires typescript-svelte-plugin (see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svelte)
-                'tsserver',                 -- Requires "npm i -g typescript"
+                'tsserver',                 -- Requires "npm install -g typescript-language-server typescript"
                 'yamlls'                    --
             }
 
