@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# TODO: Install fzf, install git-delta
+# TODO: Install fzf, install git-delta, fnm
 
 set -e
 
@@ -21,7 +21,17 @@ decorativeLine='----------------------------------'
 
 
 
-echo 'Updating Linux.'
+echo 'Adding required apt repositories.'
+echo $decorativeLine
+
+echo 'Adding Fish repository.'
+sudo apt-add-repository ppa:fish-shell/release-3 -y
+
+echo ''
+
+
+
+echo 'Upgrading packages.'
 echo $decorativeLine
 
 sudo apt update
@@ -34,7 +44,7 @@ echo ''
 echo 'Installing tooling.'
 echo $decorativeLine
 
-sudo apt install -y curl git build-essential ripgrep fd-find bat
+sudo apt install -y curl fish git build-essential ripgrep fd-find bat
 
 # Fix 'bat' name clash with other Debian package
 sudo ln -s --force /usr/bin/batcat /usr/bin/bat
@@ -64,6 +74,19 @@ echo ''
 
 
 
+echo 'Configuring generic symlinks.'
+echo $decorativeLine
+
+mkdir -p "$HOME/.config"
+
+rm -rf "$HOME/.config/fish"
+ln -sf --no-target-directory "$dotfilesPath/fish" "$HOME/.config/fish"
+echo 'Created symlink for fish.'
+
+echo ''
+
+
+
 echo 'Configuring Neovim.'
 echo $decorativeLine
 
@@ -81,21 +104,14 @@ echo ''
 
 
 
-echo 'Installing NVM.'
+echo "Setting Fish as the login shell."
 echo $decorativeLine
-
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-nvm install --lts
-nvm use --lts
-
+if [[ "$SHELL" != "$(command -v fish)" ]]; then
+    chsh -s "$(command -v fish)"
+fi
 echo ''
 
 
 
 echo 'Done!'
-echo 'Make sure to start a new shell to load the new config.'
+echo 'Make sure to refresh the shell so everything is loaded correctly.'
