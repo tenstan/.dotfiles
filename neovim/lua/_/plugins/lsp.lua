@@ -55,8 +55,9 @@ return {
                 'jsonls',                   --
                 'lua_ls',                   --
                 'marksman',                 --
-                'svelte',                   -- Requires typescript-svelte-plugin (see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svelte)
-                'tsserver',                 -- Requires "npm install -g typescript-language-server typescript"
+                'svelte',                   --
+                'tsserver',                 --
+                'volar',                    --
                 'yamlls'                    --
             }
 
@@ -103,6 +104,36 @@ return {
                             end
                         })
                     end,
+
+                    ['tsserver'] = function ()
+                        local vue_typescript_plugin = require('mason-registry')
+                            .get_package('vue-language-server')
+                            :get_install_path()
+                            .. '/node_modules/@vue/language-server'
+                            .. '/node_modules/@vue/typescript-plugin'
+
+                        require('lspconfig').tsserver.setup({
+                            init_options = {
+                                plugins = {
+                                    {
+                                        name = "@vue/typescript-plugin",
+                                        location = vue_typescript_plugin,
+                                        languages = { 'javascript', 'typescript', 'vue' }
+                                    },
+                                }
+                            },
+                            filetypes = {
+                                'javascript',
+                                'javascriptreact',
+                                'javascript.jsx',
+                                'svelte',
+                                'typescript',
+                                'typescriptreact',
+                                'typescript.tsx',
+                                'vue',
+                            },
+                        })
+                    end
                 }
             })
 
