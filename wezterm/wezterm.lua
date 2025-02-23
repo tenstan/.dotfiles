@@ -101,4 +101,5 @@ return {
     keys = keys,
     line_height = 1.2,
     font_size = 11,
+    harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 }
