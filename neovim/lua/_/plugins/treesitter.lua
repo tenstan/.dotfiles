@@ -22,6 +22,7 @@ return {
                 'svelte',
                 'tsx',
                 'typescript',
+                'vue',
                 'yaml'
             },
 
