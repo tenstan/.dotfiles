@@ -18,6 +18,8 @@ return {
                 tsx = { 'prettier' },
                 typescriptreact = { 'prettier' },
 
+                vue = { 'prettier' },
+
                 markdown = { 'prettierd' },
             },
             format_on_save = {
