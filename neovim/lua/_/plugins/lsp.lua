@@ -46,18 +46,18 @@ return {
                 cmp_capabilities)
 
             local ensure_installed = {
-                'bashls',                   --
-                'cssls',                    --
-                'cssmodules_ls',            --
-                'dockerls',                 --
-                'eslint',                   --
-                'html',                     --
-                'jsonls',                   --
-                'lua_ls',                   --
-                'marksman',                 --
-                'svelte',                   --
-                'volar',                    --
-                'yamlls'                    --
+                'bashls',        --
+                'cssls',         --
+                'cssmodules_ls', --
+                'dockerls',      --
+                'eslint',        --
+                'html',          --
+                'jsonls',        --
+                'lua_ls',        --
+                'marksman',      --
+                'svelte',        --
+                'volar',         --
+                'yamlls'         --
             }
 
             if vim.fn.has('win32') == 1 then
@@ -68,13 +68,13 @@ return {
             require('mason-lspconfig').setup({
                 ensure_installed = ensure_installed,
                 handlers = {
-                    function (server_name)
+                    function(server_name)
                         require('lspconfig')[server_name].setup({
                             capabilities = capabilities,
                         })
                     end,
 
-                    ['lua_ls'] = function ()
+                    ['lua_ls'] = function()
                         require('lspconfig').lua_ls.setup({
                             capabilities = capabilities,
                             settings = {
@@ -93,46 +93,16 @@ return {
                         })
                     end,
 
-                    ['cssmodules_ls'] = function ()
+                    ['cssmodules_ls'] = function()
                         require('lspconfig').cssmodules_ls.setup({
                             init_options = {
                                 camelCase = true,
                             },
-                            on_attach = function (client)
+                            on_attach = function(client)
                                 client.server_capabilities.definitionProvider = false
                             end
                         })
                     end,
-
-                    ['tsserver'] = function ()
-                        local vue_typescript_plugin = require('mason-registry')
-                            .get_package('vue-language-server')
-                            :get_install_path()
-                            .. '/node_modules/@vue/language-server'
-                            .. '/node_modules/@vue/typescript-plugin'
-
-                        require('lspconfig').tsserver.setup({
-                            init_options = {
-                                plugins = {
-                                    {
-                                        name = "@vue/typescript-plugin",
-                                        location = vue_typescript_plugin,
-                                        languages = { 'javascript', 'typescript', 'vue' }
-                                    },
-                                }
-                            },
-                            filetypes = {
-                                'javascript',
-                                'javascriptreact',
-                                'javascript.jsx',
-                                'svelte',
-                                'typescript',
-                                'typescriptreact',
-                                'typescript.tsx',
-                                'vue',
-                            },
-                        })
-                    end
                 }
             })
 
@@ -150,11 +120,37 @@ return {
     {
         "pmizio/typescript-tools.nvim",
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-        opts = {
-            settings = {
-                tsserver_plugins = { "typescript-plugin-css-modules" },
+        config = function()
+            local vue_language_server_path = require('mason-registry')
+                .get_package('vue-language-server')
+                :get_install_path()
+                .. '/node_modules/@vue/language-server'
+                .. '/node_modules/@vue/typescript-plugin'
 
-            }
-        },
+            require("typescript-tools").setup({
+                settings = {
+                    tsserver_plugins = { "typescript-plugin-css-modules" },
+                    filetypes = {
+                        'javascript',
+                        'javascriptreact',
+                        'javascript.jsx',
+                        'svelte',
+                        'typescript',
+                        'typescriptreact',
+                        'typescript.tsx',
+                        'vue',
+                    },
+                },
+                init_options = {
+                    plugins = {
+                        {
+                            name = '@vue/typescript-plugin',
+                            location = vue_language_server_path,
+                            languages = { 'vue' }
+                        }
+                    }
+                }
+            })
+        end
     }
 }
