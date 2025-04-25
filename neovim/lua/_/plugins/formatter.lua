@@ -9,6 +9,13 @@ return {
 
         local conform = require('conform')
         conform.setup({
+            formatters = {
+                prettier = {
+                    -- Only perform prettier formatting when a prettier config is detected within the project by conform.nvim
+                    require_cwd = true
+                }
+            },
+
             formatters_by_ft = {
                 javascript = { 'prettier' },
                 jsx = { 'prettier' },
@@ -22,21 +29,22 @@ return {
 
                 markdown = { 'prettierd' },
             },
-            format_on_save = {
-                timeout_ms = 500,
-                -- lsp_format = 'fallback',    Due to mild annoyances, I only want to format on save when I have a formatter specifically configured
-            }
-        })
 
-        vim.api.nvim_create_autocmd('BufWritePre', {
-            pattern = '*',
-            callback = function(args)
-                conform.format({ bufnr = args.buf })
+            default_format_opts = {
+                lsp_format = 'fallback',
+            },
+
+            format_on_save = function(bufnr)
+                -- Only format on save when a formatter has been explicitly configured (so don't use a LSP formatter as fallback).
+                local attached_formatters = require("conform").list_formatters(bufnr)
+                if (vim.tbl_count(attached_formatters) > 0) then
+                    return { timeout_ms = 500, }
+                end
             end
         })
 
         vim.keymap.set({ 'n', 'v' }, '<leader>cc', function()
-            conform.format({ async = true, lsp_format = 'fallback' })
+            conform.format({ async = true, })
         end)
 
         require('mason-conform').setup()
