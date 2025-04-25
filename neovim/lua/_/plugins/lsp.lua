@@ -56,7 +56,6 @@ return {
                 'lua_ls',                   --
                 'marksman',                 --
                 'svelte',                   --
-                'tsserver',                 --
                 'volar',                    --
                 'yamlls'                    --
             }
@@ -148,4 +147,14 @@ return {
             })
         end
     },
+    {
+        "pmizio/typescript-tools.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {
+            settings = {
+                tsserver_plugins = { "typescript-plugin-css-modules" },
+
+            }
+        },
+    }
 }
