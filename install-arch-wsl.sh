@@ -48,8 +48,12 @@ echo ''
 
 echo "Installing AUR packages."
 echo $decorativeLine
-yay -Syu --needed \
+aur_packages=(
     fnm
+    aspnet-runtime-8.0-bin    # Pacman also has .NET 8 available, but that is an outdated version.
+    dotnet-sdk-8.0-bin
+)
+yay -Syu --needed "${aur_packages[@]}"
 echo ''
 
 echo 'Starting Docker.'
