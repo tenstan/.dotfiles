@@ -36,18 +36,18 @@ If the current execution policy is not set (`Undefined`), make sure to run the i
 powershell -ExecutionPolicy Unrestricted -File "$home\.dotfiles\install-windows.ps1"
 ```
 
-### Ubuntu (WSL)
-```sh
-git clone https://github.com/tenstan/.dotfiles ~/.dotfiles
-cd ~/.dotfiles
-./install-ubuntu-wsl.sh
-```
-
 ### Arch Linux
 ```sh
 git clone https://github.com/tenstan/.dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ./install-arch.sh
+```
+
+### Arch Linux (WSL)
+```sh
+git clone https://github.com/tenstan/.dotfiles ~/.dotfiles
+cd ~/.dotfiles
+./install-arch-wsl.sh
 ```
 
 ## Post Installation
