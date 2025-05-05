@@ -26,7 +26,6 @@ packages_to_install=(
     openssh
     polkit
     ripgrep
-    sudo
     unzip
     wget
 )
