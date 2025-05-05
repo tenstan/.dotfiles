@@ -41,4 +41,5 @@
 [delta]
     navigate = true
     line-numbers = true
-
+    side-by-side = true
+    syntax-theme = gruvbox-dark
