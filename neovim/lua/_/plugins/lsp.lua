@@ -74,19 +74,6 @@ return {
                         })
                     end,
 
-                    ['lua_ls'] = function()
-                        require('lspconfig').lua_ls.setup({
-                            capabilities = capabilities,
-                            settings = {
-                                Lua = {
-                                    diagnostics = {
-                                        globals = { 'vim', 'require' },
-                                    }
-                                }
-                            }
-                        })
-                    end,
-
                     ['powershell_es'] = function()
                         require('lspconfig').powershell_es.setup({
                             shell = 'powershell.exe',
