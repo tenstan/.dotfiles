@@ -121,12 +121,6 @@ return {
         "pmizio/typescript-tools.nvim",
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
         config = function()
-            local vue_language_server_path = require('mason-registry')
-                .get_package('vue-language-server')
-                :get_install_path()
-                .. '/node_modules/@vue/language-server'
-                .. '/node_modules/@vue/typescript-plugin'
-
             require("typescript-tools").setup({
                 settings = {
                     tsserver_plugins = { "typescript-plugin-css-modules" },
@@ -138,18 +132,8 @@ return {
                         'typescript',
                         'typescriptreact',
                         'typescript.tsx',
-                        'vue',
                     },
                 },
-                init_options = {
-                    plugins = {
-                        {
-                            name = '@vue/typescript-plugin',
-                            location = vue_language_server_path,
-                            languages = { 'vue' }
-                        }
-                    }
-                }
             })
         end
     }
