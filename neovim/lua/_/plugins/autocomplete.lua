@@ -40,11 +40,12 @@ return {
         },
         config = function()
             local cmp = require('cmp')
+            local luasnip = require('luasnip')
 
             cmp.setup({
                 snippet = {
                     expand = function(args)
-                        require('luasnip').lsp_expand(args.body)
+                        luasnip.lsp_expand(args.body)
                     end,
                 },
                 sources = cmp.config.sources({
@@ -55,10 +56,40 @@ return {
                     { name = 'path' },
                 }),
                 mapping = cmp.mapping.preset.insert({
-                    ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-                    ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
                     ['<C-space>'] = cmp.mapping.complete(), -- Mapping doesn't work on Windows because of this I think https://github.com/libuv/libuv/issues/1958 (otherwise use an nvim GUI client instead)
                     ['<C-e>'] = cmp.mapping.abort(),
+
+                    ['<C-y>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            if luasnip.expandable() then
+                                luasnip.expand()
+                            else
+                                cmp.confirm()
+                            end
+                        else
+                            fallback()
+                        end
+                    end),
+
+                    ['<C-n>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                        elseif luasnip.locally_jumpable(1) then
+                            luasnip.jump(1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+
+                    ['<C-p>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                        elseif luasnip.locally_jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
                 }),
                 completion = {
                     completeopt = 'menu,menuone' -- Automatically select first item in completion list
@@ -94,3 +125,4 @@ return {
         end
     }
 }
+
