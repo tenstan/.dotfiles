@@ -12,6 +12,12 @@ return {
         dependencies = {
             'nvim-tree/nvim-web-devicons'
         },
-        config = true,
+        config = function()
+            require('lualine').setup({
+                extensions = {
+                    'oil'
+                }
+            })
+        end
     },
 }
