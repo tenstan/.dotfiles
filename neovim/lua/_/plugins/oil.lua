@@ -20,7 +20,10 @@ return {
 
                 return false
             end,
-        }
+        },
+        lsp_file_methods = {
+            autosave_changes = true
+        },
     },
     keys = {
         { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
