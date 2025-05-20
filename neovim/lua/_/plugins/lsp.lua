@@ -27,6 +27,15 @@ return {
         dependencies = {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
+            {
+                'folke/lazydev.nvim',
+                ft = 'lua',
+                opts = {
+                  library = {
+                    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                  },
+    },
+            }
         },
         -- NPM is required to install several LSPs
         --
