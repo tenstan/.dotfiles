@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     -- Current issues:
     -- * When using the /file slash command in the chat window, Telescope opens with parantheses filled in by default. This is annoying as you need to clear the parantheses to search files.
@@ -42,10 +43,15 @@ return {
         'nvim-treesitter/nvim-treesitter',
         {
             'zbirenbaum/copilot.lua',
+            ---@module 'copilot'
+            ---@type CopilotConfig
+            ---@diagnostic disable-next-line: missing-fields
             opts = {
+                ---@diagnostic disable-next-line: missing-fields
                 panel = {
                     enabled = false,
                 },
+                ---@diagnostic disable-next-line: missing-fields
                 suggestion = {
                     enabled = false,
                 },

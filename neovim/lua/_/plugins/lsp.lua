@@ -17,25 +17,31 @@ local on_lsp_attach = function(client, bufnr)
     -- gr - go to references
 end
 
+---@type LazySpec
 return {
     {
         'j-hui/fidget.nvim',
         config = true,
     },
     {
+        -- I'm only using this so types get recognized in the neovim config while maintaining quick lua_ls startup time.
+        'folke/lazydev.nvim',
+        ft = 'lua',
+        ---@module 'lazydev'
+        ---@type lazydev.Config
+        ---@diagnostic disable-next-line: missing-fields
+        opts = {
+            library = {
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                "lazy.nvim"
+            },
+        },
+    },
+    {
         'neovim/nvim-lspconfig',
         dependencies = {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
-            {
-                'folke/lazydev.nvim',
-                ft = 'lua',
-                opts = {
-                  library = {
-                    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-                  },
-    },
-            }
         },
         -- NPM is required to install several LSPs
         --
@@ -76,6 +82,7 @@ return {
             require('mason').setup()
             require('mason-lspconfig').setup({
                 ensure_installed = ensure_installed,
+                automatic_enable = true,
                 handlers = {
                     function(server_name)
                         require('lspconfig')[server_name].setup({

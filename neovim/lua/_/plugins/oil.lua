@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     'stevearc/oil.nvim',
     dependencies = {
@@ -5,6 +6,8 @@ return {
     },
     -- Lazy loading is not recommended for oil.nvim because it is very tricky to make it work correctly in all situations
     lazy = false,
+    ---@module 'oil'
+    ---@type oil.SetupOpts
     opts = {
         view_options = {
             is_hidden_file = function(name, _)

@@ -1,11 +1,16 @@
+---@type LazySpec
 return {
     {
         'windwp/nvim-ts-autotag',
+        ---@module 'nvim-ts-autotag'
+        ---@type nvim-ts-autotag.PluginSetup
+        ---@diagnostic disable-next-line: missing-fields
         opts = {
             opts = {
                 enable_close = true,
                 enable_rename = false, -- Handle through surround.nvim instead
-            }
+            },
+
         },
         config = true,
     },
@@ -62,7 +67,7 @@ return {
                     ['<C-y>'] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             if luasnip.expandable() then
-                                luasnip.expand()
+                                luasnip.expand({})
                             else
                                 cmp.confirm()
                             end

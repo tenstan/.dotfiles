@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     'laytan/cloak.nvim',
     config = function()

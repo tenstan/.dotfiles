@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -36,6 +37,9 @@ return {
                 enable = true
             },
 
+            -- List of parsers to ignore installing
+            ignore_install = {},
+
             -- Consistent syntax highlighting
             highlight = {
                 enable = true,
@@ -46,6 +50,8 @@ return {
                 -- Instead of true it can also be a list of languages
                 additional_vim_regex_highlighting = { 'markdown' },
             },
+
+            modules = {},
 
             -- Set mappings for treesitter motions
             textobjects = {
