@@ -40,7 +40,7 @@ return {
 
         vim.keymap.set('n', '<leader>fr', builtin.resume)
 
-        vim.keymap.set('n', 'ff', function()
+        vim.keymap.set('n', '<leader>ff', function()
             builtin.find_files {
                 file_ignore_patterns = file_ignore_patterns,
                 hidden = true,
