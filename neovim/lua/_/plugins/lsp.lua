@@ -40,8 +40,8 @@ return {
     {
         'neovim/nvim-lspconfig',
         dependencies = {
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
+            'mason-org/mason.nvim',
+            'mason-org/mason-lspconfig.nvim',
         },
         -- NPM is required to install several LSPs
         --

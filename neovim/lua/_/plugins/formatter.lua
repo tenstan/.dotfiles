@@ -2,7 +2,7 @@
 return {
     'stevearc/conform.nvim',
     dependencies = {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
         'zapling/mason-conform.nvim',
     },
     config = function()
