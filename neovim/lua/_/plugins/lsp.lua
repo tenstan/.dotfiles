@@ -71,7 +71,6 @@ return {
                 'lua_ls',        --
                 'marksman',      --
                 'svelte',        --
-                'volar',         --
                 'yamlls'         --
             }
 
