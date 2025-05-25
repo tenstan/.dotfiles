@@ -1,8 +1,10 @@
 # dotfiles
+
 You might have seen dotfiles from other users already, here you can find mine.
 My goal is to make everything as multiplatform as possible.
 
 ## What's inside
+
 - .gitconfig
 - Neovim
 - Wezterm
@@ -14,9 +16,11 @@ My goal is to make everything as multiplatform as possible.
 - Various install scripts for quickly pulling all wanted packages and more
 
 ## Installation
+
 For the installation, use the installation script for your platform located at the root of the repository.
 
 ### Windows
+
 The Windows installation script requires administrator privileges to run.
 You should probably run the script with Conhost instead of Windows Terminal, to prevent conflicts while installing the Windows Terminal settings.
 
@@ -37,6 +41,7 @@ powershell -ExecutionPolicy Unrestricted -File "$home\.dotfiles\install-windows.
 ```
 
 ### Arch Linux
+
 ```sh
 git clone https://github.com/tenstan/.dotfiles ~/.dotfiles
 cd ~/.dotfiles
@@ -44,6 +49,7 @@ cd ~/.dotfiles
 ```
 
 ### Arch Linux (WSL)
+
 ```sh
 git clone https://github.com/tenstan/.dotfiles ~/.dotfiles
 cd ~/.dotfiles
@@ -51,9 +57,11 @@ cd ~/.dotfiles
 ```
 
 ## Post Installation
+
 While not strictly necessary, here are some recommended things to perform post installation.
 
 ### SSH - IdentitiesOnly with KeePassXC
+
 To ensure that your SSH agent only sends specific SSH keys to remote servers as needed,
 I recommend setting `IdentitiesOnly` to `yes` in your `.ssh/config`.
 This option ensures the SSH agent will use only the keys explicitly defined in the configuration for each connection.
