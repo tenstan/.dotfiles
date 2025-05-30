@@ -19,6 +19,8 @@ return {
                 'jsdoc',
                 'json',
                 'lua',
+                'markdown',
+                'markdown_inline',
                 'sql',
                 'svelte',
                 'tsx',
