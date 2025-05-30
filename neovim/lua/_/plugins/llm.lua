@@ -1,7 +1,6 @@
 ---@type LazySpec
 return {
     -- Current issues:
-    -- * When using the /file slash command in the chat window, Telescope opens with parantheses filled in by default. This is annoying as you need to clear the parantheses to search files.
     -- * The /symbols slash command does not seem to work. Files don't get added as context when you select them in Telescope.
     'olimorris/codecompanion.nvim',
     event = 'VeryLazy',

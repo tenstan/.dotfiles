@@ -42,6 +42,7 @@ return {
         dependencies = {
             'mason-org/mason.nvim',
             'mason-org/mason-lspconfig.nvim',
+            'saghen/blink.cmp'
         },
         -- NPM is required to install several LSPs
         --
@@ -51,14 +52,13 @@ return {
             local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
             lsp_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-            local cmp_lsp = require('cmp_nvim_lsp')
-            local cmp_capabilities = cmp_lsp.default_capabilities()
+            local blink_capabilities = require('blink.cmp').get_lsp_capabilities()
 
             local capabilities = vim.tbl_deep_extend(
                 'force',
                 {},
                 lsp_capabilities,
-                cmp_capabilities)
+                blink_capabilities)
 
             local ensure_installed = {
                 'bashls',        --
