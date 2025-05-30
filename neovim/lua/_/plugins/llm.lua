@@ -24,13 +24,6 @@ return {
                     }
                 })
             end,
-            openai = function()
-                return require('codecompanion.adapters').extend('openai', {
-                    env = {
-                        api_key = os.getenv('OPENAI_API_KEY')
-                    }
-                })
-            end
         },
         display = {
             chat = {
