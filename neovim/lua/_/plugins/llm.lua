@@ -33,9 +33,10 @@ return {
         }
     },
     keys = {
-        { '<leader>ac', '<cmd>CodeCompanionChat<CR>',        mode = { 'n' }, desc = 'Start a new CodeCompanion chat' },
-        { '<leader>at', '<cmd>CodeCompanionChat Toggle<CR>', mode = { 'n' }, desc = 'Toggle the CodeCompanion chat pane' },
-        { '<leader>av', '<cmd>CodeCompanionChat Add<CR>',    mode = { 'v' }, desc = 'Add visually selected code to CodeCompanion chat' },
+        { '<leader>ac', '<cmd>CodeCompanionChat<CR>',        mode = { 'n' },      desc = 'Start a new CodeCompanion chat' },
+        { '<leader>at', '<cmd>CodeCompanionChat Toggle<CR>', mode = { 'n' },      desc = 'Toggle the CodeCompanion chat pane' },
+        { '<leader>av', '<cmd>CodeCompanionChat Add<CR>',    mode = { 'v' },      desc = 'Add visually selected code to CodeCompanion chat' },
+        { '<leader>aa', '<cmd>CodeCompanionActions<CR>',     mode = { 'n', 'v' }, desc = 'Open selection window to perform CodeCompanion action' }
     },
     dependencies = {
         'nvim-lua/plenary.nvim',
