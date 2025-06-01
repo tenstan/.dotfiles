@@ -41,6 +41,10 @@ packages_to_install=(
     neovim
     network-manager-applet
     networkmanager
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    noto-fonts-extra
     openssh
     pavucontrol                  # waybar dependency
     pipewire
@@ -78,11 +82,14 @@ echo ''
 
 echo "Installing AUR packages."
 echo $decorativeLine
-yay -Syu --needed \
-    chatterino2-git \
-    dropbox \
-    wezterm-git \
+aur_packages=(
+    chatterino2-git
+    dropbox
     fnm
+    ttf-ms-win11-auto   # Only used for websites that don't know how to configure their fonts properly; provide OS fonts as fallback
+    wezterm-git
+)
+yay -Syu --needed "${aur_packages[@]}"
 echo ''
 
 echo 'Starting NetworkManager.'
