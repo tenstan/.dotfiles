@@ -10,6 +10,8 @@ echo $decorativeLine
 packages_to_install=(
     base-devel
     bat
+    clang
+    cmake
     curl
     docker
     docker-buildx
@@ -21,6 +23,7 @@ packages_to_install=(
     git-delta
     jq
     less
+    make
     man-db
     neovim
     openssh

@@ -11,6 +11,7 @@ return {
                 'bash',
                 'bicep',
                 'c_sharp',
+                'cpp',
                 'css',
                 'dockerfile',
                 'html',

@@ -62,6 +62,7 @@ return {
 
             local ensure_installed = {
                 'bashls',        --
+                'clangd',        --
                 'cssls',         --
                 'cssmodules_ls', --
                 'dockerls',      --
