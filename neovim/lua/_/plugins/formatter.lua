@@ -10,13 +10,6 @@ return {
 
         local conform = require('conform')
         conform.setup({
-            formatters = {
-                prettier = {
-                    -- Only perform prettier formatting when a prettier config is detected within the project by conform.nvim
-                    require_cwd = true
-                }
-            },
-
             formatters_by_ft = {
                 javascript = { 'prettier' },
                 jsx = { 'prettier' },
@@ -37,11 +30,23 @@ return {
                 lsp_format = 'fallback',
             },
 
+            -- Only format on save when a formatter has been explicitly configured and a config file for it was found
             format_on_save = function(bufnr)
-                -- Only format on save when a formatter has been explicitly configured (so don't use a LSP formatter as fallback).
-                local attached_formatters = require("conform").list_formatters(bufnr)
-                if (vim.tbl_count(attached_formatters) > 0) then
-                    return { timeout_ms = 500, }
+                local attached_formatters = conform.list_formatters(bufnr)
+
+
+                for _, formatter in ipairs(attached_formatters) do
+                    local config = conform.get_formatter_config(formatter.name, bufnr)
+
+                    if config and config.cwd then
+                        local ctx = require("conform.runner").build_context(bufnr, config)
+                        ---@cast config conform.JobFormatterConfig
+                        local cwd = config.cwd(config, ctx)
+
+                        if cwd then
+                            return { timeout_ms = 500, }
+                        end
+                    end
                 end
             end
         })
