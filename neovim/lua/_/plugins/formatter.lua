@@ -28,7 +28,9 @@ return {
 
                 vue = { 'prettier' },
 
-                markdown = { 'prettierd' },
+                markdown = { 'prettier' },
+
+                cpp = { 'clang-format' }
             },
 
             default_format_opts = {
