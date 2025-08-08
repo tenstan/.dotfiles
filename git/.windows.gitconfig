@@ -2,7 +2,7 @@
     path = .local.gitconfig
 
 [core]
-    autoclrf = true
+    autocrlf = true
     editor = nvim --noplugin
     excludesFile = ~/.gitignore
     attributesFile = ~/.gitattributes
