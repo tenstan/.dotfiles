@@ -10,25 +10,27 @@ echo $decorativeLine
 packages_to_install=(
     base-devel
     bat
-    clang
-    cmake
+    clang                       # nvim dependency (Treesitter and native plugin builds)
+    cmake                       # nvim dependency (Telescope-fzf-native)
     curl
     docker
     docker-buildx
     docker-compose
-    fd
+    fd                          # nvim dependency (Telescope)
     fish
     fzf
     git
     git-delta
     jq
     less
-    make
+    make                        # nvim dependency (native plugin builds)
     man-db
     neovim
     openssh
     polkit
-    ripgrep
+    ripgrep                     # nvim dependency (Telescope)
+    shellcheck                  # nvim dependency (Bash Language Server linting)
+    tree-sitter-cli             # nvim dependency (Treesitter)
     unzip
     wget
 )

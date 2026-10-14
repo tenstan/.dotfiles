@@ -28,6 +28,8 @@ copies. The installer scripts are authoritative for exact destinations.
   and yay and manage Node.js with fnm. The installers are independent: when
   adding a dependency, update each installer whose platform needs it, and update
   the README if setup steps change.
+- Prefer Chocolatey for Windows package installations; use winget when there is
+  a specific reason, such as supporting a user-scoped installation without elevation.
 - Plugin `build` steps in `neovim/lua/_/plugins/` need their build tools
   installed by every applicable installer.
 - Git identity lives in the machine-local `~/.local.gitconfig`, which both Git

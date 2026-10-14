@@ -18,12 +18,13 @@ packages_to_install=(
     bat
     blueman
     brightnessctl
+    cmake                       # nvim dependency (Telescope-fzf-native)
     curl
     discord
     docker
     docker-buildx
     docker-compose
-    fd
+    fd                          # nvim dependency (Telescope)
     firefox-developer-edition
     fish
     fzf
@@ -51,11 +52,13 @@ packages_to_install=(
     pipewire-pulse
     polkit
     python-gpgme                 # Dropbox dependency when installing from AUR, see https://wiki.archlinux.org/title/Dropbox#Required_packages
-    ripgrep
+    ripgrep                     # nvim dependency (Telescope)
+    shellcheck                  # nvim dependency (Bash Language Server linting)
     slurp
     sudo
     swappy
     swaync
+    tree-sitter-cli             # nvim dependency (Treesitter)
     ufw
     unzip
     ttf-firacode-nerd            # wezterm, waybar dependency
@@ -66,7 +69,7 @@ packages_to_install=(
     wireplumber
     xdg-desktop-portal-hyprland
 )
-sudo pacman --needed --noconfirm -Syu "${packages[@]}"
+sudo pacman --needed --noconfirm -Syu "${packages_to_install[@]}"
 echo ''
 
 echo "Installing yay."

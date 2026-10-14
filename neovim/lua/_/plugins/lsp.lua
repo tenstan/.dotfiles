@@ -72,6 +72,7 @@ return {
                 'lua_ls',        --
                 'marksman',      --
                 'svelte',        --
+                'vtsls',         --
                 'yamlls'         --
             }
 
@@ -80,33 +81,27 @@ return {
             end
 
             require('mason').setup()
+            vim.lsp.config('*', { capabilities = capabilities })
+            vim.lsp.config('vtsls', {
+                settings = {
+                    vtsls = {
+                        autoUseWorkspaceTsdk = true,
+                    },
+                },
+            })
+            -- Editor Services are in PowerShell 7; scripts can still target Windows PowerShell 5.1.
+            vim.lsp.config('powershell_es', { shell = 'pwsh' })
+
+            vim.lsp.config('cssmodules_ls', {
+                init_options = { camelCase = true },
+                on_attach = function(client)
+                    client.server_capabilities.definitionProvider = false
+                end,
+            })
+
             require('mason-lspconfig').setup({
                 ensure_installed = ensure_installed,
                 automatic_enable = true,
-                handlers = {
-                    function(server_name)
-                        require('lspconfig')[server_name].setup({
-                            capabilities = capabilities,
-                        })
-                    end,
-
-                    ['powershell_es'] = function()
-                        require('lspconfig').powershell_es.setup({
-                            shell = 'powershell.exe',
-                        })
-                    end,
-
-                    ['cssmodules_ls'] = function()
-                        require('lspconfig').cssmodules_ls.setup({
-                            init_options = {
-                                camelCase = true,
-                            },
-                            on_attach = function(client)
-                                client.server_capabilities.definitionProvider = false
-                            end
-                        })
-                    end,
-                }
             })
 
             vim.api.nvim_create_autocmd('LspAttach', {
@@ -120,24 +115,4 @@ return {
             })
         end
     },
-    {
-        "pmizio/typescript-tools.nvim",
-        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-        config = function()
-            require("typescript-tools").setup({
-                settings = {
-                    tsserver_plugins = { "typescript-plugin-css-modules" },
-                    filetypes = {
-                        'javascript',
-                        'javascriptreact',
-                        'javascript.jsx',
-                        'svelte',
-                        'typescript',
-                        'typescriptreact',
-                        'typescript.tsx',
-                    },
-                },
-            })
-        end
-    }
 }

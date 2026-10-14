@@ -26,17 +26,19 @@ $env:Path = [System.Environment]::GetEnvironmentVariable('Path', 'Machine') + ';
 
 choco install -y powershell-core
 choco install -y oh-my-posh
-choco install -y microsoft-windows-terminal                          # I'll remove this when I finally move over to Windows 11
 choco install -y bat
 choco install -y delta
 choco install -y fzf
-winget install -e --id Neovim.Neovim -v '0.10.0'
-choco install -y nvm                                                 # nvim dependency (LSPs)
-choco install -y 7zip.install                                        # nvim dependency (Mason)
-choco install -y ripgrep                                             # nvim dependency (Telescope)
-choco install -y fd                                                  # nvim dependency (Telescope)
-choco install -y mingw                                               # nvim dependency (Treesitter)
-choco install -y make                                                # nvim dependency (Telescope-fzf-native)
+winget install -e --id Neovim.Neovim
+choco install -y tree-sitter                                                   # nvim dependency (Treesitter)
+winget install -e --id Kitware.CMake --installer-type portable --scope user    # nvim dependency (Telescope-fzf-native)
+choco install -y shellcheck                                                    # nvim dependency (Bash Language Server linting)
+choco install -y nvm                                                           # nvim dependency (LSPs)
+choco install -y 7zip.install                                                  # nvim dependency (Mason)
+choco install -y ripgrep                                                       # nvim dependency (Telescope)
+choco install -y fd                                                            # nvim dependency (Telescope)
+choco install -y mingw                                                         # nvim dependency (Treesitter)
+choco install -y make                                                          # nvim dependency (Telescope-fzf-native)
 
 $env:NVM_HOME = [System.Environment]::GetEnvironmentVariable('NVM_HOME', 'Machine')
 $env:NVM_SYMLINK = [System.Environment]::GetEnvironmentVariable('NVM_SYMLINK', 'Machine')
