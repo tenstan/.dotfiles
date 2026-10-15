@@ -33,7 +33,10 @@ return {
                     end
                     if vim.treesitter.get_parser(args.buf, lang) then
                         vim.treesitter.start(args.buf, lang)
-                        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                        -- Keep the filetype's built-in indent rules when no Treesitter rules exist (e.g. C#).
+                        if vim.treesitter.query.get(lang, 'indents') then
+                            vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                        end
                         -- Markdown still benefits from Vim's supplementary syntax rules.
                         if vim.bo[args.buf].filetype == 'markdown' then
                             vim.bo[args.buf].syntax = 'markdown'
