@@ -23,29 +23,28 @@ return {
         }
     },
     {
-        'L3MON4D3/LuaSnip',
-        dependencies = {
-            'rafamadriz/friendly-snippets'
-        },
-        build = 'make install_jsregexp',
-        config = function()
-            require('luasnip.loaders.from_vscode').lazy_load()
-        end
-    },
-    {
         'saghen/blink.cmp',
+        event = { 'InsertEnter', 'CmdlineEnter' },
         dependencies = {
+            -- blink loads these snippets with its built-in snippet engine
             'rafamadriz/friendly-snippets',
-            'L3MON4D3/LuaSnip'
         },
         version = '1.*', -- Using tagged releases ensures that a Rust binary is available, otherwise a Lua fallback will be provided
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
             keymap = { preset = 'default' },
-            snippets = { preset = 'luasnip' },
-            appearance = {
-                use_nvim_cmp_as_default = true,
+            sources = {
+                per_filetype = {
+                    lua = { inherit_defaults = true, 'lazydev' },
+                },
+                providers = {
+                    lazydev = {
+                        name = 'LazyDev',
+                        module = 'lazydev.integrations.blink',
+                        score_offset = 100, -- Show lazydev completions above the rest
+                    },
+                },
             },
             cmdline = {
                 keymap = {
