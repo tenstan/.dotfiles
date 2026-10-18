@@ -24,7 +24,7 @@ local on_lsp_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
 
-    -- Telescope mappings:
+    -- fzf-lua mappings:
     -- gd - go to definition
     -- gt - go to type definition
     -- gi - go to implementation

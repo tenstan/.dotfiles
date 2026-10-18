@@ -3,7 +3,7 @@ return {
     'GustavEikaas/easy-dotnet.nvim',
     dependencies = {
         'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope.nvim',
+        'ibhagwan/fzf-lua',
         'neovim/nvim-lspconfig',
         {
             'mfussenegger/nvim-dap',
@@ -36,7 +36,7 @@ return {
     -- To support auto_bootstrap_namespace before the plugin is loaded
     event = { 'BufReadPre *.cs', 'BufNewFile *.cs' },
     opts = {
-        picker = 'telescope',
+        picker = 'fzf',
         projx_lsp = {
             enabled = true
         },
