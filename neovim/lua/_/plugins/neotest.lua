@@ -8,15 +8,11 @@ return {
         'antoinemadec/FixCursorHold.nvim',
         'nvim-treesitter/nvim-treesitter',
         'nvim-neotest/neotest-jest',
-        'nsidorenco/neotest-vstest',  -- easy-dotnet's neotest adapter has problems with running multiple tests (being reported as failed/skipped even though they passed).
+        'GustavEikaas/easy-dotnet.nvim',
     },
     config = function()
         local neotest = require('neotest')
         local nio = require('nio')
-
-        -- Avoid scanning large directory trees when Neovim is opened outside a solution.
-        -- This must be configured before requiring the adapter.
-        vim.g.neotest_vstest = { broad_recursive_discovery = false }
 
         ---@diagnostic disable-next-line: missing-fields
         neotest.setup({
@@ -24,7 +20,7 @@ return {
                 require('neotest-jest')({
                     jestCommand = 'npm test',
                 }),
-                require('neotest-vstest'),
+                require('easy-dotnet.neotest'),
             },
             consumers = {
                 -- Neotest has no built-in way to rerun only failures. A consumer is the only place that has access to the client's results.
@@ -57,7 +53,9 @@ return {
             },
         })
 
-        -- Run each adapter's whole suite.
+        -- easy-dotnet's adapter cannot run the root directory (the server has no node for it),
+        -- so run every .NET project directory that contains tests instead.
+        -- Other adapters run their whole suite.
         local function run_all_tests()
             local adapter_ids = neotest.state.adapter_ids()
             if #adapter_ids == 0 then
@@ -66,12 +64,24 @@ return {
             end
 
             for _, adapter_id in ipairs(adapter_ids) do
-                neotest.run.run({ suite = true, adapter = adapter_id })
+                if vim.startswith(adapter_id, 'easy-dotnet:') then
+                    local tree = neotest.state.positions(adapter_id)
+                    if tree then
+                        for _, node in tree:iter_nodes() do
+                            local position = node:data()
+                            if position.type == 'dir' and #vim.fn.glob(position.path .. '/*.[cf]sproj', false, true) > 0 then
+                                neotest.run.run(position.path)
+                            end
+                        end
+                    end
+                else
+                    neotest.run.run({ suite = true, adapter = adapter_id })
+                end
             end
         end
 
         vim.keymap.set('n', '<leader>tn', function() neotest.run.run() end,                                         { desc = 'Run nearest test' })
-        vim.keymap.set('n', '<leader>td', function() neotest.run.run(vim.fn.expand('%')) end,         { desc = 'Run tests in document' })
+        vim.keymap.set('n', '<leader>td', function() neotest.run.run({ strategy = 'dap', suite = false }) end,      { desc = 'Debug nearest test' })
         vim.keymap.set('n', '<leader>ts', function() neotest.run.stop() end,                                        { desc = 'Stop currently running tests' })
         vim.keymap.set('n', '<leader>tt', function() neotest.summary.toggle() end,                                  { desc = 'Toggle test window' })
         vim.keymap.set('n', '<leader>ta', run_all_tests,                                                            { desc = 'Run all tests' })

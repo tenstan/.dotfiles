@@ -5,7 +5,8 @@
 local on_lsp_attach = function(client, bufnr)
     local opts = { buffer = bufnr }
 
-    if client and client:supports_method('textDocument/inlayHint', bufnr) then
+    -- Inlay hints are only wanted for the .NET language server for now.
+    if client and client.name == 'easy_dotnet' and client:supports_method('textDocument/inlayHint', bufnr) then
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end
 
