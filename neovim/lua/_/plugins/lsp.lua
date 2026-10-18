@@ -27,7 +27,7 @@ local on_lsp_attach = function(client, bufnr)
     -- Telescope mappings:
     -- gd - go to definition
     -- gt - go to type definition
-    -- gi - go to implementaiton
+    -- gi - go to implementation
     -- gr - go to references
 end
 
@@ -35,10 +35,12 @@ end
 return {
     {
         'mason-org/mason.nvim',
+        cmd = { 'Mason', 'MasonInstall', 'MasonUninstall', 'MasonUninstallAll', 'MasonUpdate', 'MasonLog' },
         opts = {},
     },
     {
         'j-hui/fidget.nvim',
+        event = 'VeryLazy',
         config = true,
     },
     {
@@ -57,6 +59,7 @@ return {
     },
     {
         'neovim/nvim-lspconfig',
+        event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
             'mason-org/mason.nvim',
             'mason-org/mason-lspconfig.nvim',
@@ -65,21 +68,13 @@ return {
         -- NPM is required to install several LSPs
         --
         -- It's important that LSP plugins are set up in order:
-        -- mason.vnim -> mason-lspconfig.nvim -> lspconfig
+        -- mason.nvim -> mason-lspconfig.nvim -> lspconfig
         config = function()
-            local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
-            lsp_capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-            local blink_capabilities = require('blink.cmp').get_lsp_capabilities()
-
-            local capabilities = vim.tbl_deep_extend(
-                'force',
-                {},
-                lsp_capabilities,
-                blink_capabilities)
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
 
             local ensure_installed = {
                 'bashls',        --
+                'bicep',         --
                 'clangd',        --
                 'cssls',         --
                 'cssmodules_ls', --
@@ -91,6 +86,7 @@ return {
                 'marksman',      --
                 'svelte',        --
                 'vtsls',         --
+                'vue_ls',        --
                 'yamlls'         --
             }
 
