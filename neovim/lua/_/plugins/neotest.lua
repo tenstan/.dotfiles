@@ -1,7 +1,46 @@
--- TODO: Make it possible to re-run failed tests only
+-- easy-dotnet's adapter cannot run the root directory (the server has no node for it),
+-- so run every .NET project directory that contains tests instead.
+-- Other adapters run their whole suite.
+local function run_all_tests()
+    local neotest = require('neotest')
+    local adapter_ids = neotest.state.adapter_ids()
+    if #adapter_ids == 0 then
+        vim.notify('No tests discovered yet. Open the test summary and wait for discovery.', vim.log.levels.WARN)
+        return
+    end
+
+    for _, adapter_id in ipairs(adapter_ids) do
+        if vim.startswith(adapter_id, 'easy-dotnet:') then
+            local tree = neotest.state.positions(adapter_id)
+            if tree then
+                for _, node in tree:iter_nodes() do
+                    local position = node:data()
+                    if position.type == 'dir' and #vim.fn.glob(position.path .. '/*.[cf]sproj', false, true) > 0 then
+                        neotest.run.run(position.path)
+                    end
+                end
+            end
+        else
+            neotest.run.run({ suite = true, adapter = adapter_id })
+        end
+    end
+end
+
 ---@type LazySpec
 return {
     'nvim-neotest/neotest',
+    keys = {
+        { '<leader>tn', function() require('neotest').run.run() end, desc = 'Run nearest test' },
+        { '<leader>td', function() require('neotest').run.run({ strategy = 'dap', suite = false }) end, desc = 'Debug nearest test' },
+        { '<leader>ts', function() require('neotest').run.stop() end, desc = 'Stop currently running tests' },
+        { '<leader>tt', function() require('neotest').summary.toggle() end, desc = 'Toggle test window' },
+        { '<leader>ta', run_all_tests, desc = 'Run all tests' },
+        -- rerun is a custom consumer, so it is unknown to the type definitions
+        ---@diagnostic disable-next-line: undefined-field
+        { '<leader>tf', function() require('neotest').rerun.failed() end, desc = 'Rerun failed tests' },
+        { '<leader>tl', function() require('neotest').run.run_last() end, desc = 'Run last test selection' },
+        { '<leader>to', function() require('neotest').output.open({ short = true, enter = true }) end, desc = 'Open test output' },
+    },
     dependencies = {
         'nvim-neotest/nvim-nio',
         'nvim-lua/plenary.nvim',
@@ -52,42 +91,5 @@ return {
                 end,
             },
         })
-
-        -- easy-dotnet's adapter cannot run the root directory (the server has no node for it),
-        -- so run every .NET project directory that contains tests instead.
-        -- Other adapters run their whole suite.
-        local function run_all_tests()
-            local adapter_ids = neotest.state.adapter_ids()
-            if #adapter_ids == 0 then
-                vim.notify('No tests discovered yet. Open the test summary and wait for discovery.', vim.log.levels.WARN)
-                return
-            end
-
-            for _, adapter_id in ipairs(adapter_ids) do
-                if vim.startswith(adapter_id, 'easy-dotnet:') then
-                    local tree = neotest.state.positions(adapter_id)
-                    if tree then
-                        for _, node in tree:iter_nodes() do
-                            local position = node:data()
-                            if position.type == 'dir' and #vim.fn.glob(position.path .. '/*.[cf]sproj', false, true) > 0 then
-                                neotest.run.run(position.path)
-                            end
-                        end
-                    end
-                else
-                    neotest.run.run({ suite = true, adapter = adapter_id })
-                end
-            end
-        end
-
-        vim.keymap.set('n', '<leader>tn', function() neotest.run.run() end,                                         { desc = 'Run nearest test' })
-        vim.keymap.set('n', '<leader>td', function() neotest.run.run({ strategy = 'dap', suite = false }) end,      { desc = 'Debug nearest test' })
-        vim.keymap.set('n', '<leader>ts', function() neotest.run.stop() end,                                        { desc = 'Stop currently running tests' })
-        vim.keymap.set('n', '<leader>tt', function() neotest.summary.toggle() end,                                  { desc = 'Toggle test window' })
-        vim.keymap.set('n', '<leader>ta', run_all_tests,                                                            { desc = 'Run all tests' })
-        ---@diagnostic disable-next-line: undefined-field
-        vim.keymap.set('n', '<leader>tf', function() neotest.rerun.failed() end,                                    { desc = 'Rerun failed tests' })
-        vim.keymap.set('n', '<leader>tl', function() neotest.run.run_last() end,                                    { desc = 'Run last test selection' })
-        vim.keymap.set('n', '<leader>to', function() neotest.output.open({ short = true, enter = true }) end, { desc = 'Open test output' })
     end
 }
