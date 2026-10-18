@@ -86,7 +86,6 @@ return {
                 'marksman',      --
                 'svelte',        --
                 'vtsls',         --
-                'vue_ls',        --
                 'yamlls'         --
             }
 
