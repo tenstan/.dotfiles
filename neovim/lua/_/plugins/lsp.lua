@@ -9,7 +9,16 @@ local on_lsp_attach = function(client, bufnr)
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end
 
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set({ 'n', 'v' }, 'K', function()
+        -- While the debugger is stopped, K inspects the value under the cursor instead of showing LSP docs.
+        local dap = package.loaded['dap']
+        local session = dap and dap.session()
+        if session and session.stopped_thread_id then
+            require('dap.ui.widgets').hover()
+        else
+            vim.lsp.buf.hover()
+        end
+    end, opts)
     vim.keymap.set('n', '<C-h>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)

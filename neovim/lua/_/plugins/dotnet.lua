@@ -5,9 +5,34 @@ return {
         'nvim-lua/plenary.nvim',
         'nvim-telescope/telescope.nvim',
         'neovim/nvim-lspconfig',
+        {
+            'mfussenegger/nvim-dap',
+            config = function()
+                local function define_signs()
+                    vim.api.nvim_set_hl(0, 'DapBreakpoint', { fg = '#fa4d56' })
+                    vim.api.nvim_set_hl(0, 'DapBreakpointCondition', { fg = '#ff832b' })
+                    vim.api.nvim_set_hl(0, 'DapLogPoint', { fg = '#78a9ff' })
+                    vim.api.nvim_set_hl(0, 'DapBreakpointRejected', { fg = '#6f6f6f' })
+                    vim.api.nvim_set_hl(0, 'DapStopped', { fg = '#f5c400' })
+                    vim.api.nvim_set_hl(0, 'DapBreakpointLine', { bg = '#2d1519' })
+                    vim.api.nvim_set_hl(0, 'DapStoppedLine', { bg = '#3d3a10' })
+
+                    vim.fn.sign_define({
+                        { name = 'DapBreakpoint', text = '●', texthl = 'DapBreakpoint', linehl = 'DapBreakpointLine' },
+                        { name = 'DapBreakpointCondition', text = '◆', texthl = 'DapBreakpointCondition', linehl = 'DapBreakpointLine' },
+                        { name = 'DapLogPoint', text = '◇', texthl = 'DapLogPoint' },
+                        { name = 'DapBreakpointRejected', text = '○', texthl = 'DapBreakpointRejected' },
+                        { name = 'DapStopped', text = '▶', texthl = 'DapStopped', linehl = 'DapStoppedLine' },
+                    })
+                end
+
+                define_signs()
+                vim.api.nvim_create_autocmd('ColorScheme', { callback = define_signs })
+            end,
+        },
     },
     ft = { 'cs', 'csproj', 'fs', 'fsproj', 'sln' },
-    cmd = { 'Dotnet', 'DotnetAddProjectReference' },
+    cmd = { 'Dotnet', 'DotnetAddProjectReference', 'Repl' },
     -- To support auto_bootstrap_namespace before the plugin is loaded
     event = { 'BufReadPre *.cs', 'BufNewFile *.cs' },
     opts = {
@@ -72,7 +97,7 @@ return {
             restart_roslyn_on_branch_change = true,
             bulk_filewatcher_registrations = true,
         },
-        debugger = { auto_register_dap = false },
+        debugger = { auto_register_dap = true },
         test_runner = {
             auto_start_testrunner = false,
             neotest_integration = true
@@ -89,6 +114,8 @@ return {
     },
     config = function(_, opts)
         require('easy-dotnet').setup(opts)
+        -- easy-dotnet also wires up its variable viewer as a T mapping while debugging.
+        require('easy-dotnet.netcoredbg').register_dap_variables_viewer()
 
         vim.api.nvim_create_user_command('DotnetAddProjectReference', function()
             local project = vim.api.nvim_buf_get_name(0)
@@ -101,6 +128,12 @@ return {
         end, {
             desc = 'Add a project reference to the current C# project',
         })
+
+        vim.api.nvim_create_user_command('Repl', function()
+            require('dap').repl.toggle()
+        end, {
+            desc = 'Toggle the debug REPL',
+        })
     end,
     keys = {
         { '<leader>ba', '<cmd>Dotnet build solution quickfix<CR>', desc = 'Build .NET solution to quickfix' },
@@ -112,5 +145,22 @@ return {
         { '<leader>br', '<cmd>Dotnet restore<CR>', desc = 'Restore .NET packages' },
         { '<leader>rr', '<cmd>Dotnet run<CR>', desc = 'Run .NET project (picker)' },
         { '<leader>rs', function() require('easy-dotnet').stop() end, desc = 'Stop the running .NET project' },
+        {
+            '<F5>',
+            function()
+                local dap = require('dap')
+                if dap.session() then
+                    dap.continue()
+                else
+                    -- Bypass nvim-dap's configuration picker, which also lists .vscode/launch.json entries for adapters we don't have (e.g. coreclr).
+                    vim.cmd('Dotnet debug profile')
+                end
+            end,
+            desc = 'Start/continue debugging',
+        },
+        { '<F9>', function() require('dap').toggle_breakpoint() end, desc = 'Toggle breakpoint' },
+        { '<F10>', function() require('dap').step_over() end, desc = 'Debug: step over' },
+        { '<F11>', function() require('dap').step_into() end, desc = 'Debug: step into' },
+        { '<S-F11>', function() require('dap').step_out() end, desc = 'Debug: step out' },
     },
 }
