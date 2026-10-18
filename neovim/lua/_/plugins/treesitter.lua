@@ -85,6 +85,12 @@ return {
         }
         for key, movement in pairs(movements) do
             vim.keymap.set({ 'n', 'x', 'o' }, key, function()
+                -- In diff mode, ]c and [c keep their built-in meaning: jumping between hunks.
+                if vim.wo.diff and (key == ']c' or key == '[c') then
+                    vim.cmd.normal({ vim.v.count1 .. key, bang = true })
+                    return
+                end
+
                 require('nvim-treesitter-textobjects.move')[movement[1]](movement[2], 'textobjects')
             end)
         end
