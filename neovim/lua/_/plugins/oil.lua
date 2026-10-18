@@ -24,6 +24,7 @@ return {
                 return false
             end,
         },
+        watch_for_changes = true,
         lsp_file_methods = {
             autosave_changes = true
         },
