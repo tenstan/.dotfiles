@@ -1,27 +1,48 @@
 ---@type LazySpec
 return {
     'stevearc/conform.nvim',
+    event = 'BufWritePre',
+    cmd = 'ConformInfo',
+    keys = {
+        {
+            '<leader>cc',
+            function() require('conform').format({ async = true }) end,
+            mode = { 'n', 'v' },
+            desc = 'Format buffer',
+        },
+    },
     dependencies = {
         'mason-org/mason.nvim',
         'zapling/mason-conform.nvim',
     },
     config = function()
         local conform = require('conform')
+        -- prettierd keeps a daemon around, which avoids prettier's slow cold start on every save
+        local prettier = { 'prettierd', 'prettier', stop_after_first = true }
+
         conform.setup({
             formatters_by_ft = {
-                javascript = { 'prettier' },
-                jsx = { 'prettier' },
-                javascriptreact = { 'prettier' },
+                javascript = prettier,
+                javascriptreact = prettier,
 
-                typescript = { 'prettier' },
-                tsx = { 'prettier' },
-                typescriptreact = { 'prettier' },
+                typescript = prettier,
+                typescriptreact = prettier,
 
-                vue = { 'prettier' },
+                vue = prettier,
+                svelte = prettier,
 
-                markdown = { 'prettier' },
+                css = prettier,
+                scss = prettier,
+                html = prettier,
 
-                cpp = { 'clang-format' }
+                json = prettier,
+                jsonc = prettier,
+                yaml = prettier,
+
+                markdown = prettier,
+
+                c = { 'clang-format' },
+                cpp = { 'clang-format' },
             },
 
             default_format_opts = {
@@ -48,10 +69,6 @@ return {
                 end
             end
         })
-
-        vim.keymap.set({ 'n', 'v' }, '<leader>cc', function()
-            conform.format({ async = true, })
-        end)
 
         require('mason-conform').setup()
     end
