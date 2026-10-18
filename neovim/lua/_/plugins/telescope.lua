@@ -33,7 +33,11 @@ return {
             "dist/",
             "package%-lock%.json",
             "yarn%.lock",
-            "%.git/"
+            "%.git/",
+            "%.vs/",
+            "%.idea/",
+            "%f[%w]bin/",
+            "%f[%w]obj/",
         }
 
         vim.keymap.set('n', 'gd', builtin.lsp_definitions)
