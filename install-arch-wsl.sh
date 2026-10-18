@@ -54,9 +54,9 @@ echo ''
 echo "Installing AUR packages."
 echo $decorativeLine
 aur_packages=(
+    aspnet-runtime-bin          # Running ASP.NET Core projects and integration tests
+    dotnet-sdk-bin              # C# language server, builds, and tests; newer than the official dotnet-sdk package
     fnm
-    aspnet-runtime-8.0-bin    # Pacman also has .NET 8 available, but that is an outdated version.
-    dotnet-sdk-8.0-bin
 )
 yay -Syu --needed "${aur_packages[@]}"
 echo ''

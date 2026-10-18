@@ -5,6 +5,10 @@
 local on_lsp_attach = function(client, bufnr)
     local opts = { buffer = bufnr }
 
+    if client and client:supports_method('textDocument/inlayHint', bufnr) then
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end
+
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', '<C-h>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
@@ -19,6 +23,10 @@ end
 
 ---@type LazySpec
 return {
+    {
+        'mason-org/mason.nvim',
+        opts = {},
+    },
     {
         'j-hui/fidget.nvim',
         config = true,
@@ -80,7 +88,6 @@ return {
                 table.insert(ensure_installed, 'powershell_es')
             end
 
-            require('mason').setup()
             vim.lsp.config('*', { capabilities = capabilities })
             vim.lsp.config('vtsls', {
                 settings = {
@@ -101,7 +108,8 @@ return {
 
             require('mason-lspconfig').setup({
                 ensure_installed = ensure_installed,
-                automatic_enable = true,
+                -- easy-dotnet manages Roslyn; avoid a second C# client.
+                automatic_enable = { exclude = { 'roslyn', 'roslyn_ls', 'omnisharp', 'csharp_ls' } },
             })
 
             vim.api.nvim_create_autocmd('LspAttach', {

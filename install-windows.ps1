@@ -39,6 +39,7 @@ choco install -y ripgrep                                                       #
 choco install -y fd                                                            # nvim dependency (Telescope)
 choco install -y mingw                                                         # nvim dependency (Treesitter)
 choco install -y make                                                          # nvim dependency (Telescope-fzf-native)
+choco install -y dotnet-sdk                                                    # C# language server, builds, and tests
 
 $env:NVM_HOME = [System.Environment]::GetEnvironmentVariable('NVM_HOME', 'Machine')
 $env:NVM_SYMLINK = [System.Environment]::GetEnvironmentVariable('NVM_SYMLINK', 'Machine')

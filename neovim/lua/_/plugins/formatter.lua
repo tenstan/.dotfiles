@@ -6,8 +6,6 @@ return {
         'zapling/mason-conform.nvim',
     },
     config = function()
-        require('mason').setup()
-
         local conform = require('conform')
         conform.setup({
             formatters_by_ft = {

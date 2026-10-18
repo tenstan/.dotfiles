@@ -86,7 +86,9 @@ echo ''
 echo "Installing AUR packages."
 echo $decorativeLine
 aur_packages=(
+    aspnet-runtime-bin          # Running ASP.NET Core projects and integration tests
     chatterino2-git
+    dotnet-sdk-bin              # C# language server, builds, and tests; newer than the official dotnet-sdk package
     dropbox
     fnm
     ttf-ms-win11-auto   # Only used for websites that don't know how to configure their fonts properly; provide OS fonts as fallback
