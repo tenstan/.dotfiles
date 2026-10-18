@@ -23,3 +23,10 @@ vim.keymap.set({'n', 'v'}, '<leader>p', [["+p]])
 vim.keymap.set('n', '<leader>;', '<cmd>only<CR>')
 
 vim.keymap.set('n', '<leader>ee', function() vim.diagnostic.open_float() end)
+
+-- Remove default keymaps that are conflicting with 'gr' (mapped to LSP references)
+for _, mode in ipairs({ 'n', 'x' }) do
+    for _, lhs in ipairs({ 'gra', 'gri', 'grn', 'grr', 'grt', 'grx' }) do
+        pcall(vim.keymap.del, mode, lhs)
+    end
+end
