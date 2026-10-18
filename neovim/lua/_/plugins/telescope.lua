@@ -4,6 +4,7 @@ return {
     dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-tree/nvim-web-devicons',
+        'nvim-telescope/telescope-ui-select.nvim',
         {
             'nvim-telescope/telescope-fzf-native.nvim',
             build = 'make'
@@ -15,9 +16,15 @@ return {
                 path_display = {
                     'filename_first',
                 }
-            }
+            },
+            extensions = {
+                ['ui-select'] = {
+                    require('telescope.themes').get_dropdown({}),
+                },
+            },
         })
         require('telescope').load_extension('fzf')
+        require('telescope').load_extension('ui-select')
 
         local builtin = require('telescope.builtin')
 
