@@ -76,7 +76,18 @@ return {
         end
     end,
     opts = {
-        files = { formatter = 'path.filename_first' },
+        -- Keep wide Nerd Font icons' overhanging right edge inside the colored span.
+        file_icon_padding = ' ',
+        files = {
+            formatter = 'path.filename_first',
+            -- Keep the filename visible instead of scrolling left to show matches in the path.
+            fzf_opts = { ['--no-hscroll'] = true },
+        },
+        grep = {
+            formatter = 'path.filename_first',
+            -- Keep the filename visible when matches occur later in the result.
+            fzf_opts = { ['--no-hscroll'] = true },
+        },
     },
     keys = {
         { 'gd', function() require('fzf-lua').lsp_definitions() end },
