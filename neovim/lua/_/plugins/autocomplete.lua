@@ -34,6 +34,7 @@ return {
         ---@type blink.cmp.Config
         opts = {
             keymap = { preset = 'default' },
+            signature = { enabled = true },
             sources = {
                 per_filetype = {
                     lua = { inherit_defaults = true, 'lazydev' },
