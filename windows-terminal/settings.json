@@ -1,49 +1,94 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": [],
+    "actions": 
+    [
+        {
+            "command": 
+            {
+                "action": "sendInput",
+                "input": "\u001b\r"
+            },
+            "id": "User.sendInput.8F63D3A9"
+        }
+    ],
     "copyFormatting": "none",
     "copyOnSelect": false,
-    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-    "firstWindowPreference": "persistedWindowLayout",
-    "keybindings": [],
-    "newTabMenu": [
+    "defaultProfile": "{1db40123-6eca-4ead-8ac7-477be92cee72}",
+    "firstWindowPreference": "defaultProfile",
+    "initialPosition": ",",
+    "keybindings": 
+    [
+        {
+            "id": "User.sendInput.8F63D3A9",
+            "keys": "shift+enter"
+        }
+    ],
+    "newTabMenu": 
+    [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": {
-        "defaults": {
+    "profiles": 
+    {
+        "defaults": 
+        {
             "bellStyle": "none",
             "colorScheme": "Midnight",
-            "font": {
+            "font": 
+            {
                 "face": "FiraCode Nerd Font",
-                "features": {
-                    "calt": 0 // Disable ligatures
+                "features": 
+                {
+                    "calt": 0
                 },
                 "size": 11,
                 "weight": "medium"
             }
         },
-        "list": [
+        "list": 
+        [
             {
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "commandline": "\"C:\\Users\\nlsmarte\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe\"",
+                "guid": "{1db40123-6eca-4ead-8ac7-477be92cee72}",
                 "hidden": false,
-                "name": "Windows PowerShell",
-                "startingDirectory": "%USERPROFILE%\\repos"
+                "icon": "ms-appx:///ProfileIcons/pwsh.png",
+                "name": "PowerShell Core",
+                "startingDirectory": "C:\\git"
             },
             {
-                "guid": "{49046c08-d119-5ae1-a038-b9d269383b40}",
+                "commandline": "C:\\windows\\system32\\wsl.exe -d Ubuntu-24.04",
+                "guid": "{78a18084-7565-4567-841c-d8fa30728f88}",
                 "hidden": false,
-                "name": "WSL",
+                "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
+                "name": "Ubuntu-24.04",
+                "pathTranslationStyle": "wsl",
+                "startingDirectory": "~"
+            },
+            {
+                "guid": "{7a134698-8b4c-5585-a6e7-81eef532ca42}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 18",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{48e571e6-8610-5624-bd7c-20476e2c3519}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 18",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{9fc28709-4a69-56a2-b24b-c151acd539cf}",
+                "hidden": false,
+                "name": "archlinux",
                 "source": "Microsoft.WSL"
             }
         ]
     },
-    "schemes": [
+    "schemes": 
+    [
         {
-            // Based on https://github.com/dasupradyumna/midnight.nvim/blob/843ddf4a40acbe0ad459d60d70d08a601bc53e57/extras/kitty/midnight.conf
-            "name": "Midnight",
             "background": "#080C10",
             "black": "#181818",
             "blue": "#5080FF",
@@ -59,6 +104,7 @@
             "cyan": "#50B0E0",
             "foreground": "#B5BDC5",
             "green": "#42BE65",
+            "name": "Midnight",
             "purple": "#A665D0",
             "red": "#FA4D56",
             "selectionBackground": "#012749",
