@@ -79,6 +79,7 @@ return {
                 'cssmodules_ls', --
                 'dockerls',      --
                 'eslint',        --
+                'helm_ls',       --
                 'html',          --
                 'jsonls',        --
                 'lua_ls',        --

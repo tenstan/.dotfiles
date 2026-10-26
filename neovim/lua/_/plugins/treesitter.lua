@@ -11,9 +11,22 @@ return {
         local treesitter = require('nvim-treesitter')
         treesitter.setup()
         treesitter.install({
-            'bash', 'bicep', 'c_sharp', 'cpp', 'css', 'dockerfile', 'html', 'http',
-            'javascript', 'jsdoc', 'json', 'lua', 'markdown', 'markdown_inline',
-            'sql', 'svelte', 'tsx', 'typescript', 'xml', 'yaml',
+            'bash',
+            'c_sharp',
+            'cpp',
+            'css',
+            'gotmpl', -- Gives better highlighting for Helm templates. Not automatically installed by the 'helm' parser.
+            'html',
+            'javascript',
+            'jsdoc',
+            'json',
+            'lua',
+            'markdown',
+            'sql',
+            'tsx',
+            'typescript',
+            'xml',
+            'yaml',
         })
 
         -- Enable Treesitter features when a buffer's filetype is set.
