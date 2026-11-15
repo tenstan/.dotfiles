@@ -1,0 +1,36 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "policies": [
+    { "action": "provider.use", "resource": "*", "effect": "deny" },
+    { "action": "provider.use", "resource": "github-copilot", "effect": "allow" },
+  ],
+  "model": "github-copilot/gpt-6.1-sol",
+  "mcp": {},
+  "permissions": [
+    { "action": "*", "resource": "*", "effect": "allow" },
+    // No automatic file reads until explicit allowlist entries are added below.
+    { "action": "read", "resource": "*", "effect": "ask" },
+    { "action": "edit", "resource": "*", "effect": "ask" },
+    { "action": "shell", "resource": "*", "effect": "ask" },
+    { "action": "shell", "resource": "git diff *", "effect": "allow" },
+    { "action": "shell", "resource": "git status *", "effect": "allow" },
+    { "action": "shell", "resource": "git --no-pager diff *", "effect": "allow" },
+    { "action": "shell", "resource": "git --no-pager status *", "effect": "allow" },
+    { "action": "shell", "resource": "git ls-files *", "effect": "allow" },
+    { "action": "shell", "resource": "git grep *", "effect": "allow" },
+    { "action": "shell", "resource": "git show *", "effect": "allow" },
+    { "action": "shell", "resource": "git ls-tree *", "effect": "allow" },
+    { "action": "shell", "resource": "git log *", "effect": "allow" },
+    { "action": "shell", "resource": "git reflog *", "effect": "allow" },
+    { "action": "shell", "resource": "cd *", "effect": "allow" },
+    { "action": "shell", "resource": "command *", "effect": "allow" },
+    { "action": "shell", "resource": "rg *", "effect": "allow" },
+    { "action": "shell", "resource": "kubectl get *", "effect": "allow" },
+    { "action": "shell", "resource": "helm get *", "effect": "allow" },
+    { "action": "shell", "resource": "dotnet build *", "effect": "allow" },
+    { "action": "shell", "resource": "dotnet test *", "effect": "allow" },
+    { "action": "shell", "resource": "dotnet --info", "effect": "allow" },
+    { "action": "external_directory", "resource": "*", "effect": "ask" },
+    { "action": "external_directory", "resource": "~/.local/share/opencode/worktree/**", "effect": "allow" }
+  ]
+}

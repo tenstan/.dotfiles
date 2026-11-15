@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "prompt": {
+    "paste": "full"
+  },
+  "tabs": {
+    "mode": "off"
+  },
+  "attention": {
+    "notifications": true,
+    "sound": true,
+    "volume": 0.4
+  },
+  "keybinds": {
+    "app.exit": "none"
+  }
+}
