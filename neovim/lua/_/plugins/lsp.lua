@@ -84,14 +84,11 @@ return {
                 'jsonls',        --
                 'lua_ls',        --
                 'marksman',      --
+                'powershell_es', --
                 'svelte',        --
                 'vtsls',         --
                 'yamlls'         --
             }
-
-            if vim.fn.has('win32') == 1 then
-                table.insert(ensure_installed, 'powershell_es')
-            end
 
             vim.lsp.config('*', { capabilities = capabilities })
             vim.lsp.config('vtsls', {

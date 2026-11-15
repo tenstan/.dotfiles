@@ -3,6 +3,7 @@ return {
     {
         'olimorris/codecompanion.nvim',
         version = '>=19.27.0 <20.0.0',
+        ft = { 'codecompanion' },
         dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-treesitter/nvim-treesitter',
@@ -74,7 +75,6 @@ return {
     },
     {
         'MeanderingProgrammer/render-markdown.nvim',
-        ft = { 'codecompanion' },
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
         ---@module 'render-markdown'
         opts = {
