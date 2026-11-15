@@ -91,6 +91,7 @@ aur_packages=(
     dotnet-sdk-bin              # C# language server, builds, and tests; newer than the official dotnet-sdk package
     dropbox
     fnm
+    powershell-bin              # PowerShell (pwsh)
     ttf-ms-win11-auto   # Only used for websites that don't know how to configure their fonts properly; provide OS fonts as fallback
     wezterm-git
 )

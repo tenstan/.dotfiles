@@ -25,6 +25,7 @@ winget install -e --interactive --id Chocolatey.Chocolatey
 $env:Path = [System.Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path', 'User')
 
 choco install -y powershell-core
+choco install -y wezterm
 choco install -y oh-my-posh
 choco install -y bat
 choco install -y delta

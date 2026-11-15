@@ -33,6 +33,7 @@ packages_to_install=(
     tree-sitter-cli             # nvim dependency (Treesitter)
     unzip
     wget
+    wl-clipboard                # Neovim clipboard integration through WSLg
 )
 sudo pacman --needed --noconfirm -Syu "${packages_to_install[@]}"
 echo ''
@@ -57,6 +58,7 @@ aur_packages=(
     aspnet-runtime-bin          # Running ASP.NET Core projects and integration tests
     dotnet-sdk-bin              # C# language server, builds, and tests; newer than the official dotnet-sdk package
     fnm
+    powershell-bin              # PowerShell (pwsh)
 )
 yay -Syu --needed "${aur_packages[@]}"
 echo ''
