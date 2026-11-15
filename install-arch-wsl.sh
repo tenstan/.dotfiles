@@ -26,6 +26,7 @@ packages_to_install=(
     make                        # nvim dependency (native plugin builds)
     man-db
     neovim
+    opencode
     openssh
     polkit
     ripgrep                     # nvim dependency (Telescope)

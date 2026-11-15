@@ -46,6 +46,7 @@ packages_to_install=(
     noto-fonts-cjk
     noto-fonts-emoji
     noto-fonts-extra
+    opencode
     openssh
     pavucontrol                  # waybar dependency
     pipewire

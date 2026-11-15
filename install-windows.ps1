@@ -206,6 +206,19 @@ Write-Host ''
 
 
 
+Write-Host 'Installing OpenCode CLI.'
+Write-Host $decorativeLine
+
+# OpenCode V2 does not support Windows package managers; install after activating Node.js.
+npm.cmd install --global @opencode/cli
+if ($LASTEXITCODE -ne 0) {
+    throw 'OpenCode CLI installation failed.'
+}
+
+Write-Host ''
+
+
+
 Write-Host 'Done!'
 Write-Host 'Make sure to reload the shell, so that added environment variables are loaded.'
 Write-Host 'You should also probably verify whether some stuff requires antivirus exclusions (OhMyPosh).'
