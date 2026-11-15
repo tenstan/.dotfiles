@@ -158,6 +158,19 @@ Write-Host ''
 
 
 
+Write-Host 'Configuring WezTerm.'
+Write-Host $decorativeLine
+
+$weztermConfigDirectory = Join-Path -Path $home -ChildPath '.config\wezterm'
+$weztermConfigPath = Join-Path -Path $weztermConfigDirectory -ChildPath 'wezterm.lua'
+New-Item -ItemType Directory -Path $weztermConfigDirectory -Force | Out-Null
+New-Item -ItemType SymbolicLink -Target "$dotfilesPath\wezterm\wezterm.lua" -Path $weztermConfigPath -Force | Out-Null
+Write-Host "WezTerm config has been placed under $weztermConfigPath."
+
+Write-Host ''
+
+
+
 Write-Host 'Configuring Neovim.'
 Write-Host $decorativeLine
 
